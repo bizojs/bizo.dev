@@ -1,62 +1,81 @@
 <svelte:head>
-	<title>bizo demos</title>
+	<title>bizo7L</title>
 </svelte:head>
 
 <script>
-	import Navigation from "$lib/components/Navigation.svelte"
-	import { keybind } from "$lib/util"
+	import { Project } from "$lib/components/project"
 
-	$: navigating = false
+	$: selected = 0
 
-	const pages = [
+	const projects = [
 		{
-			name: "Theme Switcher",
-			url: "/theme-switcher"
+			name: "Demos",
+			description: "The website of all demos that I make for SvelteKit. Each demo will have an interactive view of how it works.",
+			image: "/projects/favicon.svg",
+			github: "bizojs/demo.bizo.dev",
+			website: "https://demo.bizo.dev"
+		},
+		{
+			name: "Blog",
+			description: "My personal blog for thoughts and creations. Most posts will relate to SvelteKit and TailwindCSS.",
+			image: "/projects/favicon.svg",
+			github: "bizojs/demo.bizo.dev",
+			website: "https://demo.bizo.dev"
+		},
+		{
+			name: "Rada",
+			description: "An intuitive Discord bot to help with all your moderation / management needs.",
+			image: "/projects/Rada.png",
+			github: "RadaBot/Rada",
+			website: "https://rada.bizo.dev"
+		},
+		{
+			name: "Snippet Generator",
+			description: "Generate custom code snippets for Visual Studio Code",
+			image: "/projects/favicon.svg",
+			github: "RadaBot/Rada",
+			website: "https://rada.bizo.dev"
+		},
+		{
+			name: "Temple MDW",
+			description: "The guardian of The Sheep Pen Discord server for the streamer bebanteeni.",
+			image: "/projects/TempleMDT.png",
+			github: "bizojs/temple-mdw"
+		},
+		{
+			name: "Lightable",
+			description: "Open-source chatting. Free, Open-source, Forever.",
+			image: "/projects/Lightable.png",
+			github: "Lightable/Lightable"
+		},
+		{
+			name: "The Sheep Guardian",
+			description: "The guardian of The Sheep Pen Discord server for the streamer bebanteeni.",
+			image: "/projects/TheSheepGuardian.png",
+			website: "https://discord.gg/MZsAS3pBUa"
 		}
 	]
 
-	function toggleNavigation() {
-		navigating = !navigating
+	function setPage(page) {
+		selected = page
 	}
 </script>
 
-<div use:keybind={{ key: "N" }} on:keybind={toggleNavigation} class="flex flex-col gap-10 lg:m-40">
-	<p class="text-4xl lg:text-left text-center my-10">Welcome to bizo demos</p>
-	<div class="select-none w-full">
-		<button on:click={toggleNavigation} class="flex gap-2 items-center rounded-lg bg-secondary-light/80 hover:bg-secondary-light dark:bg-secondary-dark/40 dark:hover:bg-secondary-dark/60 w-full p-3 justify-between transition">
-			<div class="flex items-center gap-4">
-				<svg class="w-8 h-8 stroke-primary-dark dark:stroke-primary-light" xmlns="http://www.w3.org/2000/svg" width="44" height="44" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
-					<path stroke="none" d="M0 0h24v24H0z" fill="none"/>
-					<path d="M10 10m-7 0a7 7 0 1 0 14 0a7 7 0 1 0 -14 0" />
-					<path d="M21 21l-6 -6" />
-				  </svg>
-				  <p class="text-lg text-secondary-light/80 dark:text-secondary-dark/80">Search...</p>
+<div class="flex flex-col lg:m-40">
+	<p class="text-6xl lg:text-left text-center my-10 font-semibold">Hey there.</p>
+	<div class="flex flex-col">
+		<p class="text-lg dark:text-primary-dark/80">A self-taught developer from the <span class="font-semibold">UK</span>.</p>
+		<p class="text-lg dark:text-primary-dark/80">Primary focus: <span class="font-semibold">frontend web development</span>.</p>
+	</div>
+	<p class="mt-32 dark:text-primary-dark/90 text-lg font-semibold">Check out some of my stuff</p>
+	<div class="flex flex-col gap-3 items-center justify-center mt-6">
+		{#key selected}
+			<Project bind:item={projects[selected]} />
+			<div class="flex items-center gap-2">
+				{#each projects as project, i}
+					<button on:click={() => setPage(i)} class="p-2 cursor-pointer rounded-full bg-btn-light {projects[selected].name === project.name ? "bg-nav-light dark:bg-nav-dark" : "bg-btn-light/40 dark:bg-secondary-dark hover:!bg-export"} transition"></button>
+				{/each}
 			</div>
-			<div class="lg:flex hidden gap-2 items-center">
-				<span class="py-1 px-3.5 rounded relative border-2 border-btn-light dark:border-border-dark/20">
-					<p class="text-lg">⇧</p>
-				</span>
-				<span class="py-1 px-3.5 rounded relative border-2 border-btn-light dark:border-border-dark/20">
-					<p class="text-lg">N</p>
-				</span>
-			</div>
-			<button class="lg:hidden flex relative">
-				<svg class="w-8 h-8 stroke-secondary-dark dark:stroke-secondary-light" xmlns="http://www.w3.org/2000/svg" width="44" height="44" viewBox="0 0 24 24" stroke-width="1" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
-					<path stroke="none" d="M0 0h24v24H0z" fill="none"/>
-					<path d="M8 13v-8.5a1.5 1.5 0 0 1 3 0v7.5" />
-					<path d="M11 11.5v-2a1.5 1.5 0 1 1 3 0v2.5" />
-					<path d="M14 10.5a1.5 1.5 0 0 1 3 0v1.5" />
-					<path d="M17 11.5a1.5 1.5 0 0 1 3 0v4.5a6 6 0 0 1 -6 6h-2h.208a6 6 0 0 1 -5.012 -2.7a69.74 69.74 0 0 1 -.196 -.3c-.312 -.479 -1.407 -2.388 -3.286 -5.728a1.5 1.5 0 0 1 .536 -2.022a1.867 1.867 0 0 1 2.28 .28l1.47 1.47" />
-				  </svg>
-			</button>
-		</button>
+		{/key}
 	</div>
 </div>
-
-{#if navigating}
-	<Navigation
-		{pages}
-		on:close={toggleNavigation}
-		on:navigate={toggleNavigation}
-	/>
-{/if}

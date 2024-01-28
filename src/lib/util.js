@@ -1,18 +1,3 @@
-export function keybind(node, { key }) {
-    if (!key) return
-    const handleKeybind = (event) => {
-        if (event.key === key && event.shiftKey) {
-            node.dispatchEvent(new CustomEvent("keybind"))
-        }
-    }
-    document.addEventListener("keyup", handleKeybind)
-    return {
-        destroy() {
-            document.removeEventListener("keyup", handleKeybind)
-        }
-    }
-}
-
 export function clickOutside(node, { trigger } = { trigger: null }) {
     const handleClick = (event) => {
         if (trigger && event.target.id === trigger) return
