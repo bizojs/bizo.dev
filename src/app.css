@@ -1,0 +1,23 @@
+@import url('https://fonts.googleapis.com/css2?family=DM+Mono&family=Rubik:wght@300;400;500;600;700;800;900&display=swap');
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+* {
+	font-family: "Rubik", sans-serif;
+	@apply text-primary-light dark:text-primary-dark;
+}
+
+.font-code {
+	font-family: "DM Mono", monospace;
+	@apply text-lg
+}
+
+*:not(input[type="text"]):focus-visible {
+    @apply ring-2 ring-white/60 outline-0
+}
+
+input[type="text"]:focus-visible {
+	@apply ring-0 outline-0
+}
