@@ -1,5 +1,3 @@
-export const prerender = false
-
 export const actions = {
 
     setTheme: async ({ request, cookies }) => {
