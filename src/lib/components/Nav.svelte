@@ -104,7 +104,7 @@
                 </span>
             </button>
         </form>
-        <button id="trigger" on:click={() => menuOpen = !menuOpen} class="lg:hidden flex p-2 rounded hover:bg-btn-light/80 dark:hover:bg-btn-dark/60 transition">
+        <button type="button" id="trigger" on:click={() => menuOpen = !menuOpen} class="lg:hidden flex p-2 rounded hover:bg-btn-light/80 dark:hover:bg-btn-dark/60 transition">
             <IconMenu class="w-5 h-5" />
         </button>
         {#if menuOpen}
@@ -113,7 +113,7 @@
                 on:outclick={() => menuOpen = !menuOpen}
                 class="lg:hidden flex flex-col gap-1 p-2 rounded absolute top-16 right-0 w-1/2 bg-nav-light dark:bg-nav-dark z-50"
             >
-                <button on:click={() => goToUrl("/blog")} class="{$page.route?.id?.includes("/blog") ? "bg-btn-light/20 dark:bg-btn-dark/20" : ""} flex justify-between items-center p-2 rounded hover:bg-btn-light/80 dark:hover:bg-btn-dark/60 transition text-sm text-secondary-light dark:text-secondary-dark">
+                <button type="button" on:click={() => goToUrl("/blog")} class="{$page.route?.id?.includes("/blog") ? "bg-btn-light/20 dark:bg-btn-dark/20" : ""} flex justify-between items-center p-2 rounded hover:bg-btn-light/80 dark:hover:bg-btn-dark/60 transition text-sm text-secondary-light dark:text-secondary-dark">
                     <p>Blog</p>
                     <IconBlog class="w-5 h-5" />
                 </button>
@@ -121,7 +121,7 @@
                     <p>Contact</p>
                     <IconAt class="w-5 h-5" />
                 </a>
-                <button on:click={() => goToUrl("/rss.xml")} class="flex justify-between items-center p-2 rounded hover:bg-btn-light/80 dark:hover:bg-btn-dark/60 transition text-sm text-secondary-light dark:text-secondary-dark">
+                <button type="button" on:click={() => goToUrl("/rss.xml")} class="flex justify-between items-center p-2 rounded hover:bg-btn-light/80 dark:hover:bg-btn-dark/60 transition text-sm text-secondary-light dark:text-secondary-dark">
                     <p>RSS</p>
                     <IconRSS class="w-5 h-5" />
                 </button>

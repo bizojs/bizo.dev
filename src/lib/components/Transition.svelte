@@ -1,10 +1,9 @@
 <script>
     import { fade } from "svelte/transition"
-
-    export let url
+    import { page } from "$app/stores"
 </script>
 
-{#key url}
+{#key $page.url.pathname}
     <div class="h-full" in:fade>
         <slot />
     </div>
