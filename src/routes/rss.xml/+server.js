@@ -13,16 +13,16 @@ export async function GET({ fetch, url }) {
             <channel>
                 <title>${config.title}</title>
                 <description>${config.description}</description>
-                <link>${url.origin}</link>
-                <atom:link href="${url.href}" rel="self" type="application/rss+xml"/>
+                <link>${config.url}</link>
+                <atom:link href="${config.url}" rel="self" type="application/rss+xml"/>
                 ${posts
                     .map(
                         (post) => `
                         <item>
                             <title>${post.title}</title>
                             <description>${post.description}</description>
-                            <link>${url.origin}/${post.slug}</link>
-                            <guid isPermaLink="true">${url.origin}/blog/${post.slug}</guid>
+                            <link>${config.url}/blog/${post.slug}</link>
+                            <guid isPermaLink="true">${config.url}/blog/${post.slug}</guid>
                             <pubDate>${new Date(post.date).toUTCString()}</pubDate>
                         </item>
                     `
