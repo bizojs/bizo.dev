@@ -1,5 +1,3 @@
-export const prerender = true
-
 import * as config from "$lib/config"
 
 export async function GET({ fetch, url }) {
