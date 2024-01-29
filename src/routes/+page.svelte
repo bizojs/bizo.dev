@@ -64,14 +64,14 @@
 </script>
 
 <div class="flex flex-col lg:mx-40">
-	<p class="text-6xl lg:text-left text-center my-20 font-semibold">Hey there.</p>
+	<p class="text-6xl lg:text-left text-center lg:my-20 my-8 font-semibold">Hey there.</p>
 	<div class="flex flex-col">
-		<p class="text-lg dark:text-primary-dark/80">A self-taught developer from the <span class="font-semibold">UK</span>.</p>
-		<p class="text-lg dark:text-primary-dark/80">Primary focus: <span class="font-semibold">frontend web development</span>.</p>
+		<p class="text-lg dark:text-primary-dark/80 lg:text-left text-center">A self-taught developer from the <span class="font-semibold">UK</span>.</p>
+		<p class="text-lg dark:text-primary-dark/80 lg:text-left text-center">Primary focus: <span class="font-semibold">frontend web development</span>.</p>
 	</div>
-	<div class="flex items-center">
-		<button on:click={() => setTab("projects")} class="mt-32 pb-4 dark:text-primary-dark/90 text-lg font-semibold px-3 pr-5 border-b-2 dark:border-secondary-dark transition {tab === "projects" ? "!border-export" : ""}">Check out some of my stuff</button>
-		<button on:click={() => setTab("socials")} class="mt-32 pb-4 dark:text-primary-dark/90 text-lg font-semibold px-5 border-b-2 dark:border-secondary-dark transition {tab === "socials" ? "!border-export" : ""}">...or my Socials</button>
+	<div class="flex lg:justify-start justify-center items-center">
+		<button on:click={() => setTab("projects")} class="mt-32 pb-4 dark:text-primary-dark/90 text-lg font-semibold px-3 pr-5 border-b-2 dark:border-secondary-dark transition {tab === "projects" ? "!border-export" : ""}">Projects</button>
+		<button on:click={() => setTab("socials")} class="mt-32 pb-4 dark:text-primary-dark/90 text-lg font-semibold px-5 border-b-2 dark:border-secondary-dark transition {tab === "socials" ? "!border-export" : ""}">Socials</button>
 	</div>
 	{#if tab === "projects"}
 		<div class="flex flex-col gap-3 items-center justify-center mt-6">
