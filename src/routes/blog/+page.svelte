@@ -11,7 +11,7 @@
     export let data
 </script>
 
-<div class="flex justify-center lg:my-20 mt-0 gap-6 flex-wrap w-full items-stretch">
+<div class="flex justify-center lg:my-20 mt-0 gap-6 flex-wrap items-stretch lg:mx-40">
     {#each data.posts as post}
         <Post {post} />
     {/each}
