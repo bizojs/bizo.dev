@@ -7,6 +7,9 @@ export default {
     extend: {
       colors: {
         export: "#ef596f",
+        package: "#89ca78",
+        import: "#d55fde",
+        bracket: "#ABB2BF",
         primary: {
           light: "#EBEFF7",
           dark: "#383C41"
@@ -36,12 +39,14 @@ export default {
         secondary: {
           light: "#5C6163",
           dark: "#A6AAAC"
-        },
-        import: "#d55fde",
-        bracket: "#ABB2BF",
-        export: "#ef596f",
-        package: "#89ca78",
+        }
       },
+      strokeWidth: {
+        "1.5": "1.5"
+      },
+      animation: {
+        scale: "scale 1.5s ease infinite"
+      }
     },
   },
   plugins: [],

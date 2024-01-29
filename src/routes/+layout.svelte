@@ -1,10 +1,14 @@
 <script>
-  import Nav from "$lib/components/Nav.svelte"
+  import { Nav, Transition } from "$lib/components"
   import "../app.css"
+
+  export let data
 </script>
 
 <Nav />
 
 <div class="flex flex-col p-5">
-  <slot />
+  <Transition url={data.url}>
+    <slot />
+  </Transition>
 </div>

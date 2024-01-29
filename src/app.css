@@ -9,10 +9,21 @@
 	@apply text-primary-light dark:text-primary-dark;
 }
 
-.font-code {
+
+svg > path,
+svg > g
+{
+    @apply stroke-1.5
+}
+
+.font-code,
+code
+{
 	font-family: "DM Mono", monospace;
 	@apply text-lg
 }
+
+
 
 *:not(input[type="text"]):focus-visible {
     @apply ring-2 ring-white/60 outline-0
@@ -20,4 +31,121 @@
 
 input[type="text"]:focus-visible {
 	@apply ring-0 outline-0
+}
+
+pre {
+	font-family: "DM Mono", monospace;
+    @apply text-start p-2 rounded text-base !overflow-x-auto pr-12 flex bg-secondary-light dark:bg-secondary-dark/50 relative
+}
+pre * {
+	font-family: "DM Mono", monospace;
+	@apply text-base
+}
+code {
+    @apply relative
+}
+code#code {
+	font-family: "DM Mono", monospace;
+    @apply bg-btn-light/60 dark:bg-secondary-dark/40 px-2 rounded
+}
+#copy-to-clipboard {
+    @apply p-1 rounded bg-secondary-light/80 hover:bg-secondary-light dark:bg-secondary-dark/30 dark:hover:bg-secondary-dark/50 cursor-pointer absolute right-1 transition-all top-1
+}
+
+/* Blog Post Styling */
+
+#post-content {
+	@apply text-lg
+}
+#post-content > h1 {
+	@apply text-4xl mt-8 pb-2 border-b-2 border-border-light/10 dark:border-border-dark/10
+}
+#post-content > h2 {
+	@apply text-3xl mt-8
+}
+#post-content > h3 {
+	@apply text-2xl
+}
+#post-content .task-list-item {
+	@apply list-none
+}
+#post-content li {
+	@apply pl-2
+}
+#post-content ul,
+#post-content ol {
+	@apply list-outside ml-10
+}
+#post-content ul {
+	@apply list-["🎨"]
+}
+#post-content ol {
+	@apply list-decimal
+}
+#post-content > p code,
+#post-content > ul li code,
+#post-content > ol li code,
+#post-content > h1 code,
+#post-content > h1 code,
+#post-content > span code,
+#post-content > blockquote p code {
+	font-family: "DM Mono", monospace;
+	@apply bg-secondary-light dark:bg-secondary-dark/40 px-0.5 py-0.5 rounded text-base
+}
+blockquote,
+.blockquote {
+	@apply p-5 border-l-4 border-btn-light dark:border-secondary-dark rounded bg-nav-light/80 dark:bg-nav-dark/20 text-base
+}
+#post-content > p,
+#post-content > p del,
+#post-content > p a,
+#post-content > blockquote p,
+#post-content > p code {
+    @apply text-primary-light/80 dark:text-primary-dark/80
+}
+#post-content > p a,
+#post-content > ul li a {
+    @apply border-b-2 border-export transition-all hover:!text-export
+}
+#post-content > p {
+    @apply text-justify
+}
+#post-content input[type="checkbox"] {
+    transform: translateY(0.1em);
+    @apply appearance-none bg-secondary-light/50 dark:bg-secondary-dark/50 items-center w-6 h-6 rounded
+}
+#post-content input[type="checkbox"]:checked::before {
+    content: url("/checkmark.svg");
+    @apply pl-0.5
+}
+#post-content > table {
+    @apply block w-full overflow-x-auto lg:py-0 py-3
+}
+#post-content > table tr td {
+    @apply border-2 border-border-light/20 dark:border-border-dark/20 p-5
+}
+#post-content > table tr td.rightright {
+    @apply bg-secondary-light dark:bg-secondary-dark
+}
+#post-content > table tr td h4 {
+    @apply m-0 p-0 font-normal
+}
+/* #post-content #table-of-contents {
+    @apply fixed top-1/2 -translate-y-1/2 left-5
+}
+ul:first-of-type {
+    @apply fixed top-2/3 -translate-y-1/2 left-5
+} */
+
+/* Animations */
+@keyframes scale {
+    from {
+        transform: scale(100%);
+    }
+    50% {
+        transform: scale(100.5%);
+    }
+    to {
+        transform: scale(100%);
+    }
 }

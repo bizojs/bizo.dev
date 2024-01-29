@@ -16,9 +16,15 @@
                     </a>
                 {/if}
                 {#if item.website}
-                    <a href={item.website} target="_blank" rel="noreferrer" class="flex items-center gap-2 bg-btn-light/60 hover:bg-btn-light/80 dark:hover:bg-secondary-dark/60 dark:bg-secondary-dark transition px-6 py-2 rounded">
-                        Website
-                    </a>
+                    {#if item.website.startsWith("/")}
+                        <a href={item.website} class="flex items-center gap-2 bg-btn-light/60 hover:bg-btn-light/80 dark:hover:bg-secondary-dark/60 dark:bg-secondary-dark transition px-6 py-2 rounded">
+                            Website
+                        </a>
+                    {:else}
+                        <a href={item.website} target="_blank" rel="noreferrer" class="flex items-center gap-2 bg-btn-light/60 hover:bg-btn-light/80 dark:hover:bg-secondary-dark/60 dark:bg-secondary-dark transition px-6 py-2 rounded">
+                            Website
+                        </a>
+                    {/if}
                 {/if}
             </div>
         </div>
