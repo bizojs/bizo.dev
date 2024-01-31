@@ -247,4 +247,4 @@ file:src/routes/+layout.svelte
 
 # Done
 
-Just like that, your project should now have a dark mode toggle! [Demo]()
+Just like that, your project should now have toast notifications!
