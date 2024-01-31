@@ -10,6 +10,11 @@ export default {
         package: "#89ca78",
         import: "#d55fde",
         bracket: "#ABB2BF",
+        titlebar: "#161922",
+        scroll: {
+          light: "#989EA7",
+          dark: "#1C1E21"
+        },
         primary: {
           light: "#EBEFF7",
           dark: "#383C41"
@@ -29,6 +34,34 @@ export default {
         border: {
           light: "#393C43",
           dark: "#B0BABF"
+        },
+        notif: {
+          default: {
+            toast: {
+              dark: "#3D4046",
+              light: "#B7BEC9"
+            },
+            progress: {
+              dark: "#62676E",
+              light: "#A7AEB9"
+            }
+          },
+          success: {
+            toast: "#4AB87A",
+            progress: "#2B9158"
+          },
+          error: {
+            toast: "#DB4F5B",
+            progress: "#BD414B"
+          },
+          info: {
+            toast: "#6D9DEC",
+            progress: "#537EC4"
+          },
+          warning: {
+            toast: "#EFA853",
+            progress: "#D38F3E"
+          },
         }
       },
       textColor: {

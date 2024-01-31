@@ -75,7 +75,7 @@ A note[^1]
 # Codeblock with highlighting
 
 ```js
-// routes/+layout.js
+file:routes/+layout.js
 export async function load({ url }) {
 	return {
 		url: url.pathname

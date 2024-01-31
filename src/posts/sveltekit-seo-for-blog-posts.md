@@ -32,6 +32,7 @@ With these steps, you're well on your way to optimizing your SvelteKit blog's SE
 Below you will find a snippet of code that you can use which explains what each meta tag is used for:
 
 ```svelte
+file:path/to/+page.svelte
 <svelte:head>
     <!-- The headline for your blog post in search results -->
 	<title>Blog post title</title>

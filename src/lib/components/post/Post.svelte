@@ -12,7 +12,7 @@
             <div class="flex glex-col gap-2 flex-wrap items-end">
                 {#each post.categories as category}
                     <div class="flex lg:flex-grow-0 flex-grow lg:justify-start justify-center py-1.5 px-2.5 rounded bg-nav-light dark:bg-secondary-dark">
-                        <p class="text-secondary-light dark:text-secondary-dark text-sm">{category}</p>
+                        <p class="text-secondary-light dark:text-secondary-dark text-sm">#{category}</p>
                     </div>
                 {/each}
             </div>

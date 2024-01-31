@@ -11,7 +11,7 @@ sharable: true
 
 ## Table of contents
 
-# Prerequisits
+# Prerequisites
 
 - A SvelteKit website with TailwindCSS integrated. Refer to [Adding TailwindCSS to your SvelteKit website](/blog/adding-tailwindcss-to-your-sveltekit-website) for details
 - Setting "darkMode" to `class` in your Tailwind config
@@ -25,7 +25,7 @@ sharable: true
 In this case, we are going to use our Nav component. We are also going to use a form with SvelteKits progressive enhancements so the backend can handle the cookies.
 
 ```svelte
-<!-- lib/components/Nav.svelte -->
+file:lib/components/Nav.svelte
 <script>
   import { enhance, applyAction } from "$app/forms"
   import { invalidateAll } from "$app/navigation"
@@ -71,7 +71,7 @@ In this case, we are going to use our Nav component. We are also going to use a 
 We need to create the form action that the toggle is going to be using.
 
 ```js
-// src/routes/+page.server.js
+file:src/routes/+page.server.js
 export const actions = {
   setTheme: async ({ request, cookies }) => {
     const data = await request.formData()
@@ -95,7 +95,7 @@ export const actions = {
 Now we need to use `hooks.server.js` to fetch our cookie and return it to the app
 
 ```js
-// src/hooks.server.js
+file:src/hooks.server.js
 export const handle = async({ event, resolve }) => {
   const theme = event.cookies.get("color-scheme")
   const defaultTheme = "dark"
@@ -127,7 +127,7 @@ export const handle = async({ event, resolve }) => {
 We can use the `hooks.server.js` we created to get our "theme" data that we use in the Nav component.
 
 ```js
-// src/routes/+layout.server.js
+file:src/routes/+layout.server.js
 export const load = async ({ locals }) => {
   return {
     theme: locals.theme

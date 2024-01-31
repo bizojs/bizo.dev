@@ -14,7 +14,7 @@
 </svelte:head>
 
 <script>
-    import { formatDate, formatCode, copy } from "$lib/util"
+    import { formatDate, copy, handleCodeblocks } from "$lib/util"
     import { Dialog, Social, Scroll } from "$lib/components"
     import { x, linkedin, reddit } from "$lib/format"
     import { page } from "$app/stores"
@@ -27,23 +27,7 @@
 
     $: shareDialogOpen = false
 
-    onMount(() => {
-        const codeblocks = document.querySelectorAll("pre")
-        for (const codeblock of codeblocks) {
-            let button = document.createElement("button")
-			button.id = "copy-to-clipboard"
-            button.innerHTML = 
-            `<svg class="w-6 h-6 stroke-secondary-dark dark:stroke-secondary-light" xmlns="http://www.w3.org/2000/svg" width="44" height="44" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
-                <path stroke="none" d="M0 0h24v24H0z" fill="none"/>
-                <path d="M9 5h-2a2 2 0 0 0 -2 2v12a2 2 0 0 0 2 2h10a2 2 0 0 0 2 -2v-12a2 2 0 0 0 -2 -2h-2" />
-                <path d="M9 3m0 2a2 2 0 0 1 2 -2h2a2 2 0 0 1 2 2v0a2 2 0 0 1 -2 2h-2a2 2 0 0 1 -2 -2z" />
-            </svg>`
-            button.onclick = () => {
-                copy(formatCode(codeblock.innerText))
-            }
-            codeblock.appendChild(button)
-        }
-    })
+    onMount(handleCodeblocks)
 
     function toggleShareDialog() {
         shareDialogOpen = !shareDialogOpen
@@ -52,7 +36,7 @@
     export let data
 </script>
 
-<Scroll color="bg-export" height="h-1.5" />
+<Scroll color="bg-export" height="h-1" />
 
 <article class="flex flex-col w-full items-center mt-20 gap-12">
     <div class="flex flex-col gap-5 lg:w-1/2 w-full items-center">
@@ -74,7 +58,7 @@
         <div class="flex items-center gap-2 flex-wrap justify-center select-none">
             {#each data.meta.categories as category}
                 <div class="flex lg:flex-grow-0 flex-grow lg:justify-start justify-center py-1.5 px-2.5 rounded bg-nav-light dark:bg-secondary-dark">
-                    <p class="text-secondary-light dark:text-secondary-dark text-sm">{category}</p>
+                    <p class="text-secondary-light dark:text-secondary-dark text-sm">#{category}</p>
                 </div>
             {/each}
         </div>
@@ -86,7 +70,7 @@
 
 {#if shareDialogOpen}
     <Dialog title="Share this post..." on:close={toggleShareDialog}>
-        <div class="flex gap-2 flex-wrap">
+        <div class="flex lg:justify-start justify-center gap-2 flex-wrap">
             <Social url={x({ title: data.title, url: $page.url.pathname })}>
                 <IconX class="w-6 h-6" />
             </Social>

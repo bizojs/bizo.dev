@@ -51,7 +51,10 @@ const config = {
 			postcss: true
 		}),
 		mdsvex(mdsvexOptions)
-	]
+	],
+	compilerOptions: {
+		customElement: true
+	}
 }
 
 export default config

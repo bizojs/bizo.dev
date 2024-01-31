@@ -15,7 +15,7 @@
 
 <div
     style="width: {width}%"
-    class="{color} {height} m-0 p-0 fixed top-0 left-0 z-[999] transition-[width] duration-200 ease-out"
+    class="{color} {height} m-0 p-0 fixed lg:block hidden top-0 left-0 z-[999] transition-[width] duration-200 ease-out"
 />
 
 <svelte:window on:scroll={handleScroll} />

@@ -85,21 +85,21 @@
 			{/key}
 		</div>
 	{:else if tab === "socials"}
-		<div class="flex gap-4 items-center mt-10">
+		<div class="flex gap-4 items-center flex-wrap lg:justify-start justify-center mt-10">
 			<Social url="mailto:contact@bizo.dev">
-				<IconEmail class="w-8 h-8" />
+				<IconEmail class="lg:w-8 lg:h-8 w-6 h-6" />
 			</Social>
 			<Social url="https://discord.com/users/286509757546758156">
-				<IconDiscord class="w-8 h-8" />
+				<IconDiscord class="lg:w-8 lg:h-8 w-6 h-6" />
 			</Social>
 			<Social url="https://github.com/bizojs">
-				<IconGithub class="w-8 h-8" />
+				<IconGithub class="lg:w-8 lg:h-8 w-6 h-6" />
 			</Social>
 			<Social url="https://x.com/bizo7L">
-				<IconTwitter class="w-8 h-8" />
+				<IconTwitter class="lg:w-8 lg:h-8 w-6 h-6" />
 			</Social>
 			<Social url="https://reddit.com/u/bizo7L">
-				<IconReddit class="w-8 h-8" />
+				<IconReddit class="lg:w-8 lg:h-8 w-6 h-6" />
 			</Social>
 		</div>
 	{/if}

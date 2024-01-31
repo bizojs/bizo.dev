@@ -18,7 +18,7 @@ sharable: true
 To begin, you will need to install the `adapter-node` package from sveltejs to use the node adapter
 
 ```shell
-# Terminal
+file:Terminal
 npm i @sveltejs/adapter-node
 ```
 
@@ -29,14 +29,14 @@ npm i @sveltejs/adapter-node
 Once you've installed that package, you will want to navigate to your `svelte.config.js` file in the root of your directory and update your config to use the new node adapter:
 
 ```js
-// svelte.config.js
+file:svelte.config.js
 // import adapter from "@sveltejs/adapter-auto"
 import adapter from "@sveltejs/adapter-node"
 
 /** @type {import("@sveltejs/kit").Config} */
 const config = {
   kit: {
-     // adapter: adapter()
+    // adapter: adapter()
 		adapter: adapter({
 			out: "build"
 		})
@@ -58,17 +58,6 @@ To use brotli compression, simply just add `precompress: true` to your adapter c
 
 <br>
 
-<!-- Head to your `package.json` file and update your **preview** script like so:
-
-```json
-"scripts": {
-    ...
-    "preview": "vite preview --host --port <port>"
-},
-```
-
-Replacing `<port>` with your desired port -->
-
 # Building your project
 
 You can build your project files for production with the following command (may require sudo):
@@ -83,18 +72,34 @@ Now your project should begin building!
 Make sure you have PM2 installed on your machine (`npm i -g pm2`), then you can run the command:
 
 ```shell
+file:Terminal
 PORT=<port> pm2 start build/index.js --name <name>
 ```
-
-<!-- ```shell
-# Terminal
-pm2 start npm --no-automation --name <name> -- run preview
-``` -->
 
 Replacing `<port>` and `<name>` with the your desired port and name for pm2. For example it should look like this:
 
 ```shell
+file:Terminal
 PORT=3008 pm2 start build/index.js --name my-website
+```
+
+<br>
+
+> **Note #1**<br>
+> you may need to add `ORIGIN=https://domain.com` to the start script if your app uses form actions. The command would look like this:
+
+```shell
+file:Terminal
+PORT=<port> ORIGIN=<url> pm2 start build/index.js --name <name>
+```
+<br>
+
+> **Note #2**<br>
+> If you are using Windows to host your bot, `PORT=XXXX ORIGIN=XXX` will not work. Instead you can use $:env in powershell:
+
+```shell
+file:Powershell
+$env:PORT=XXXX $env:ORIGIN="https://domain.com" pm2 start build/index.js --name <name>
 ```
 
 ## Done!

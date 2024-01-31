@@ -1,6 +1,7 @@
-export function clickOutside(node, { trigger } = { trigger: null }) {
+import { notification } from "$lib/notifications"
+
+export function clickOutside(node) {
     const handleClick = (event) => {
-        if (trigger && event.target.id === trigger) return
         if (!node.contains(event.target)) {
             node.dispatchEvent(new CustomEvent("outclick"))
         }
@@ -20,13 +21,23 @@ export function clickOutside(node, { trigger } = { trigger: null }) {
     }
 }
 
+export function uuid() {
+    return (Date.now().toString(16) + Number(Math.random().toString().slice(12)).toString(16))
+}
+
 export function formatDate(date, dateStyle = "medium", locale = "en") {
     return new Intl.DateTimeFormat(locale, { dateStyle })
         .format(new Date(date))
 }
 
 export function copy(text) {
-    navigator.clipboard.writeText(text)
+    try {
+        navigator.clipboard.writeText(text)
+        return notification.success({ message: "Copied to clipboard" })
+    } catch (e) {
+        console.error(e)
+        return notification.error({ message: "Failed to copy. Check console for details." })
+    }
 }
 
 export function scroll(bool) {
@@ -40,9 +51,67 @@ export function focus(element) {
 export function formatCode(code) {
 	return code
         .replace(/(\.{3,})\s*/g, "")              // ... comments
-        .replace(/(\<\!\-\-\s(.*)\-\-\>*)/gm, "") // html comments
-        .replace(/(\/\/[^\n\r]*)/gm, "")          // js comments
-        .replace(/(\/\*[\s\S]*?\*\/)/g, "")       // css comments
-        .replace(/(^\#\s.*)/gm, "")               // # comments
+        .replace(/^file:(.*)$/gm, "")             // file:line
         .trim()
+}
+
+export function formatFile(code) {
+    return firstLineIsFile(code) ? code.replace(/file:/g, "") : "File not set"
+}
+
+export function firstLineIsFile(file) {
+    return file.match(/file:/g)
+}
+
+export function handleCodeblocks() {
+    const codeblocks = document.querySelectorAll("pre")
+    for (const codeblock of codeblocks) {
+        // create the new container
+        const container = document.createElement("div")
+        container.id = "pre-wrap"
+        // create the button
+        const button = document.createElement("button")
+        // create titlebar
+        const titlebar = document.createElement("div")
+        titlebar.id = "titlebar"
+        // create title for file
+        const file = document.createElement("p")
+        file.id = "file-name"
+        file.innerText = formatFile(codeblock.children[0].children[0].innerText ?? "File not set")
+
+        button.id = "copy-to-clipboard"
+        button.innerHTML =
+        `<svg class="w-6 h-6" xmlns="http://www.w3.org/2000/svg" width="44" height="44" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+            <path stroke="none" d="M0 0h24v24H0z" fill="none"/>
+            <path d="M9 5h-2a2 2 0 0 0 -2 2v12a2 2 0 0 0 2 2h3m9 -9v-5a2 2 0 0 0 -2 -2h-2" />
+            <path d="M13 17v-1a1 1 0 0 1 1 -1h1m3 0h1a1 1 0 0 1 1 1v1m0 3v1a1 1 0 0 1 -1 1h-1m-3 0h-1a1 1 0 0 1 -1 -1v-1" />
+            <path d="M9 3m0 2a2 2 0 0 1 2 -2h2a2 2 0 0 1 2 2v0a2 2 0 0 1 -2 2h-2a2 2 0 0 1 -2 -2z" />
+        </svg>`
+        button.onclick = () => {
+            copy(formatCode(codeblock.innerText))
+        }
+
+        const pre = codeblock.cloneNode(true)
+        pre.innerHTML = pre.children[0].innerHTML
+
+        if (firstLineIsFile(codeblock.children[0]?.innerText)) {
+            pre.children[0].remove()
+        }
+
+
+        // clone the codeblock
+        // if (firstLineIsFile(codeblock.children[0]?.children[0]?.innerText)) {
+        //     codeblock.getElementsByTagName("pre")[0]?.remove()
+        //     codeblock.innerHTML = codeblock.children[0].innerHTML
+        // }
+        // const pre = codeblock.cloneNode(true)
+
+        // add the button and codeblock to the container
+        titlebar.appendChild(file)
+        titlebar.appendChild(button)
+        container.appendChild(titlebar)
+        container.appendChild(pre)
+        // replace the codeblock with the new container
+        codeblock.replaceWith(container)
+    }
 }

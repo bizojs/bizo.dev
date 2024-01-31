@@ -1,7 +1,10 @@
 <script>
   import { Nav, Transition } from "$lib/components"
+  import { Notifications } from "$lib/notifications"
   import "../app.css"
 </script>
+
+<Notifications />
 
 <Nav />
 
