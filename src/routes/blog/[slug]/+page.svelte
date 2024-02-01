@@ -14,8 +14,8 @@
 </svelte:head>
 
 <script>
-    import { formatDate, copy, handleCodeblocks } from "$lib/util"
     import { Dialog, Social, Scroll } from "$lib/components"
+    import { copy, handleCodeblocks } from "$lib/util"
     import { x, linkedin, reddit } from "$lib/format"
     import { page } from "$app/stores"
     import { onMount } from "svelte"
@@ -42,17 +42,10 @@
     <div class="flex flex-col gap-5 lg:w-1/2 w-full items-center">
         <hgroup class="flex flex-col gap-4 items-center">
             <h1 class="text-5xl font-semibold break-words text-center">{data.meta.title}</h1>
-            <div class="flex gap-2 items-center">
-                <div class="flex lg:flex-grow-0 flex-grow lg:justify-start justify-center py-1.5 px-2.5 rounded bg-nav-light dark:bg-secondary-dark select-none">
-                    <p class="text-primary-light dark:text-primary-dark text-base">
-                        Published on {formatDate(data.meta.date)}
-                    </p>
-                </div>
-                <button on:click={toggleShareDialog} class="flex lg:flex-grow-0 flex-grow lg:justify-start justify-center py-1.5 px-2.5 rounded bg-nav-light dark:bg-secondary-dark select-none">
-                    <p class="text-primary-light dark:text-primary-dark text-base">
-                        Share
-                    </p>
-                </button>
+            <div class="flex flex-wrap gap-2 items-center">
+                <p class="text-primary-light/80 dark:text-primary-dark/80 text-base">
+                    Published on {new Date(data.meta.date).format()}
+                </p>
             </div>
         </hgroup>
         <div class="flex items-center gap-2 flex-wrap justify-center select-none">
@@ -61,6 +54,11 @@
                     <p class="text-secondary-light dark:text-secondary-dark text-sm">#{category}</p>
                 </div>
             {/each}
+            <button on:click={toggleShareDialog} class="flex lg:flex-grow-0 flex-grow lg:justify-start justify-center py-1.5 px-2.5 rounded bg-nav-light dark:bg-secondary-dark hover:bg-btn-light hover:dark:bg-btn-dark transition select-none">
+                <p class="text-primary-light dark:text-primary-dark text-sm">
+                    Share
+                </p>
+            </button>
         </div>
     </div>
     <div id="post-content" class="prose flex flex-col gap-3 lg:w-1/2 w-full justify-center">

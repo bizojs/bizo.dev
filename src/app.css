@@ -21,6 +21,11 @@ svg.thick > g {
     @apply stroke-[2.5]
 }
 
+svg.post-views > path,
+svg.post-views > g {
+    @apply stroke-[2] !stroke-primary-dark/60 dark:!stroke-primary-light/60
+}
+
 .font-code,
 code
 {

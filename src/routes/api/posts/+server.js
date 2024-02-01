@@ -1,9 +1,14 @@
 import { json } from "@sveltejs/kit"
+import { db } from "$lib/database"
 
 async function getPosts() {
     let posts = []
 
     const paths = import.meta.glob("/src/posts/*.md", { eager: true })
+
+    const postViews = await db.views.findMany({
+        select: { slug: true, views: true },
+    })
 
     for (const path in paths) {
         const file = paths[path]
@@ -11,7 +16,11 @@ async function getPosts() {
         
         if (file && typeof file === "object" && "metadata" in file && slug) {
             const metadata = file.metadata
-            const post = { ...metadata, slug }
+            const post = {
+                ...metadata,
+                slug,
+                views: postViews.filter(posts => posts.slug === slug)[0]?.views ?? 0
+            }
             post.published && posts.push(post)
         }
     }

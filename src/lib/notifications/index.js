@@ -1,10 +1,10 @@
+export { toastFlip, toastFlyIn, toastFlyOut } from "./animation.js"
+
 export { default as Notifications } from "./Container.svelte"
 export { default as Content } from "./Content.svelte"
 export { default as Icon } from "./Icons.svelte"
 
-export { toastFlip, toastFlyIn, toastFlyOut } from "./animation.js"
 export { toast } from "./stores.js"
-
 import { toast } from "./stores.js"
 
 function show (

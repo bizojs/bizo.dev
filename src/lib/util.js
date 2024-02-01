@@ -25,10 +25,13 @@ export function uuid() {
     return (Date.now().toString(16) + Number(Math.random().toString().slice(12)).toString(16))
 }
 
-export function formatDate(date, dateStyle = "medium", locale = "en") {
-    return new Intl.DateTimeFormat(locale, { dateStyle })
-        .format(new Date(date))
-}
+Date.prototype.format = (function() {
+    return this.toLocaleDateString("en-US", {
+        year: "numeric",
+        month: "long",
+        day: "numeric"
+    })
+})
 
 export function copy(text) {
     try {
