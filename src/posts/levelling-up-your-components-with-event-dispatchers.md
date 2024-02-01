@@ -155,4 +155,4 @@ file:src/routes/+page.svelte
 
 # Done!
 
-You now have a dialog component that can accept user inputs! This is a very basic example of what can be accomplished with Event Dispatchers. You can view an example [here](https://demo.bizo.dev/event-dispatcher)
+You now have a dialog component that can accept user inputs! This is a very basic example of what can be accomplished with Event Dispatchers. [View the demo here](https://demo.bizo.dev/event-dispatcher)
