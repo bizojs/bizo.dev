@@ -101,14 +101,6 @@ export function handleCodeblocks() {
             pre.children[0].remove()
         }
 
-
-        // clone the codeblock
-        // if (firstLineIsFile(codeblock.children[0]?.children[0]?.innerText)) {
-        //     codeblock.getElementsByTagName("pre")[0]?.remove()
-        //     codeblock.innerHTML = codeblock.children[0].innerHTML
-        // }
-        // const pre = codeblock.cloneNode(true)
-
         // add the button and codeblock to the container
         titlebar.appendChild(file)
         titlebar.appendChild(button)

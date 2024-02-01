@@ -25,6 +25,10 @@ svg.post-views > path,
 svg.post-views > g {
     @apply stroke-[2] !stroke-primary-dark/60 dark:!stroke-primary-light/60
 }
+svg.help > path,
+svg.help > g {
+    @apply stroke-[2] !stroke-primary-dark/60 dark:!stroke-primary-light/60 group-hover:!stroke-sky-500 dark:group-hover:!stroke-sky-500 transition
+}
 
 .font-code,
 code
@@ -56,7 +60,7 @@ code {
 }
 code#code {
 	font-family: "DM Mono", monospace;
-    @apply bg-btn-light/60 dark:bg-secondary-dark/40 px-2 rounded
+    @apply bg-secondary-light dark:bg-secondary-dark/40 px-1 py-0.5 rounded text-base
 }
 #pre-wrap {
     @apply w-full relative
