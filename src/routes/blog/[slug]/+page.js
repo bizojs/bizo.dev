@@ -1,7 +1,6 @@
-import { AUTH_SECRET } from "$env/static/private"
 import { error } from "@sveltejs/kit"
 
-export async function load({ params, fetch }) {
+export async function load({ params }) {
     const { slug } = params
     try {
         const post = await import(`../../../posts/${slug}.md`)
@@ -10,19 +9,6 @@ export async function load({ params, fetch }) {
             throw error(404, `Could not find post "${slug}"`)
         }
 
-        try {
-            await fetch("/api/views/update", {
-                method: "POST",
-                headers: {
-                    "Content-Type": "application/json",
-                    "Authorization": `Bearer ${AUTH_SECRET}`
-                },
-                body: JSON.stringify(slug)
-            })
-        } catch (e) {
-            console.error(`[ViewCountUpdate]: ${e.message} for /api/views/update (${slug})`)
-        }
-        
         return {
             content: post.default,
             meta: post.metadata
