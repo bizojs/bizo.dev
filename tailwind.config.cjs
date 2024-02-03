@@ -79,6 +79,9 @@ export default {
       },
       animation: {
         scale: "scale 1.5s ease infinite"
+      },
+      fontFamily: {
+        "code": ["DM Mono", "monospace"]
       }
     },
   },

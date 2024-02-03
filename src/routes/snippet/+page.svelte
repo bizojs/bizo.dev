@@ -52,7 +52,7 @@
             <input class="px-4 py-2 text-lg w-full h-fit rounded bg-secondary-light/70 dark:bg-secondary-dark/40 hover:bg-secondary-light dark:hover:bg-secondary-dark/60 transition placeholder:text-primary-light/60 dark:placeholder:text-primary-dark/70" type="text" placeholder="Text trigger" bind:value={trigger}>
         </div>
         <div class="flex flex-grow w-full h-full">
-            <textarea bind:value={content} class="px-4 py-2 text-lg min-h-[10rem] w-full rounded bg-secondary-light/70 dark:bg-secondary-dark/40 hover:bg-secondary-light dark:hover:bg-secondary-dark/60 resize-none transition" type="text"></textarea>
+            <textarea bind:value={content} class="px-4 py-2 text-lg min-h-[10rem] w-full rounded bg-secondary-light/70 dark:bg-secondary-dark/40 hover:bg-secondary-light dark:hover:bg-secondary-dark/60 resize-none transition font-code" type="text"></textarea>
         </div>
     </div>
     <div class="flex flex-col gap-2 flex-grow lg:w-1/3 w-full relative">

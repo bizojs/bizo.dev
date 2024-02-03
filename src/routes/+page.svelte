@@ -4,6 +4,7 @@
 
 <script>
 	import { Project, Social } from "$lib/components"
+    import { scale, fade } from "svelte/transition"
 
 	import IconDiscord from "~icons/tabler/brand-discord"
 	import IconGithub from "~icons/tabler/brand-github"
@@ -74,18 +75,18 @@
 		<button on:click={() => setTab("socials")} class="mt-32 pb-4 dark:text-primary-dark/90 text-lg font-semibold px-5 border-b-2 dark:border-secondary-dark transition {tab === "socials" ? "!border-export" : ""}">Socials</button>
 	</div>
 	{#if tab === "projects"}
-		<div class="flex flex-col gap-3 items-center justify-center mt-6">
+		<div in:scale={{ start: 0.99, opacity: 0.3, duration: 1000 }} class="flex flex-col gap-5 items-center justify-center mt-6">
 			{#key selected}
 				<Project bind:item={projects[selected]} />
 				<div class="flex items-center gap-2">
 					{#each projects as project, i}
-						<button on:click={() => setPage(i)} class="p-2 cursor-pointer rounded-full bg-btn-light {projects[selected].name === project.name ? "bg-nav-light dark:bg-nav-dark" : "bg-btn-light/40 dark:bg-secondary-dark hover:!bg-export dark:"} transition"></button>
+						<button on:click={() => setPage(i)} class="py-1 lg:px-12 px-5 rounded-full cursor-pointer bg-btn-light {projects[selected].name === project.name ? "bg-btn-light dark:bg-nav-dark" : "bg-btn-light/40 dark:bg-secondary-dark hover:!bg-export"} transition"></button>
 					{/each}
 				</div>
 			{/key}
 		</div>
 	{:else if tab === "socials"}
-		<div class="flex gap-4 items-center flex-wrap lg:justify-start justify-center mt-10">
+		<div in:fade class="flex gap-4 items-center flex-wrap lg:justify-start justify-center mt-10">
 			<Social url="mailto:contact@bizo.dev">
 				<IconEmail class="lg:w-8 lg:h-8 w-6 h-6" />
 			</Social>
