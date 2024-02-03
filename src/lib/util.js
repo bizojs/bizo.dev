@@ -1,14 +1,35 @@
 import { notification } from "$lib/notifications"
 
+/**
+ * SvelteKit Action to handle closing modals when clicking outside of the main element or presing Escape
+ * @param   {HTMLElement} node - The main element of the modal
+ * @listens event:click - Clicking outside of the main element
+ * @listens event:keyup - Pressing Escape
+ * @fires   outclick    - Fired when clicking outside of the main element
+ * @fires   escape      - Fired when presing Escape
+ * @namespace clickOutside
+ */
 export function clickOutside(node) {
+    /**
+     * Handles the click event and dispatches the outclick event
+     * @param {Event} event - The click event
+     * @fires outclick - Fired when clicking outside of the main element
+     * @memberof clickOutside
+     */
     const handleClick = (event) => {
         if (!node.contains(event.target)) {
             node.dispatchEvent(new CustomEvent("outclick"))
         }
     }
+    /**
+     * Handles the keyup event and dispatches the outclick event if the key is Escape
+     * @param {Event} event - The click event
+     * @fires outclick - Fired when clicking outside of the main element
+     * @memberof clickOutside
+     */
     const handleKeyUp = (event) => {
         if (event.key === "Escape") {
-            node.dispatchEvent(new CustomEvent("outclick"))
+            node.dispatchEvent(new CustomEvent("escape"))
         }
     }
     document.addEventListener("click", handleClick, true)
@@ -21,6 +42,10 @@ export function clickOutside(node) {
     }
 }
 
+/**
+ * Generates a UUID
+ * @return {String} 
+ */
 export function uuid() {
     return (Date.now().toString(16) + Number(Math.random().toString().slice(12)).toString(16))
 }
@@ -33,6 +58,11 @@ Date.prototype.format = (function() {
     })
 })
 
+/**
+ * Copy text to the clipboard
+ * @param  {String} text - The text to copy
+ * @return {void}
+ */
 export function copy(text) {
     try {
         navigator.clipboard.writeText(text)
@@ -51,6 +81,11 @@ export function focus(element) {
     document.querySelector(element).focus()
 }
 
+/**
+ * Removes `...` comments and `file:...` text from codeblocks
+ * @param {String} code - The code to format
+ * @return {String}
+ */
 export function formatCode(code) {
 	return code
         .replace(/(\.{3,})\s*/g, "")              // ... comments
