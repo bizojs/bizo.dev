@@ -1,32 +1,23 @@
 import { notification } from "$lib/notifications"
 
 /**
- * SvelteKit Action to handle closing modals when clicking outside of the main element or presing Escape
- * @param   {HTMLElement} node - The main element of the modal
+ * SvelteKit Action to handle closing modals
+ * @param   {HTMLElement} node - The modal element
  * @listens event:click - Clicking outside of the main element
- * @listens event:keyup - Pressing Escape
- * @fires   outclick    - Fired when clicking outside of the main element
- * @fires   escape      - Fired when presing Escape
- * @namespace clickOutside
+ * @fires   outclick
+ * @listens event:keyup - Pressing `Escape`
+ * @fires   escape
+ * @example <caption>Example usage of clickOutside action</caption>
+ * <modal use:clickOutside on:outclick={closeModal} on:escape={closeModal}>
+ *  ...
+ * </modal>
  */
 export function clickOutside(node) {
-    /**
-     * Handles the click event and dispatches the outclick event
-     * @param {Event} event - The click event
-     * @fires outclick - Fired when clicking outside of the main element
-     * @memberof clickOutside
-     */
     const handleClick = (event) => {
         if (!node.contains(event.target)) {
             node.dispatchEvent(new CustomEvent("outclick"))
         }
     }
-    /**
-     * Handles the keyup event and dispatches the outclick event if the key is Escape
-     * @param {Event} event - The click event
-     * @fires outclick - Fired when clicking outside of the main element
-     * @memberof clickOutside
-     */
     const handleKeyUp = (event) => {
         if (event.key === "Escape") {
             node.dispatchEvent(new CustomEvent("escape"))
@@ -38,6 +29,38 @@ export function clickOutside(node) {
         destroy() {
             document.removeEventListener("click", handleClick, true)
             document.removeEventListener("keyup", handleKeyUp, true)
+        }
+    }
+}
+
+/**
+ * SvelteKit Action to handle changing a selected element based on the scroll position
+ * @param   {HTMLElement} node - The element
+ * @listens event:touchmove - Handle getting the scroll direction
+ * @listens event:touchend  - Handle the scroll
+ * @fires   left            - If the scroll direction is left. Use with `on:left`
+ * @fires   right           - If the scroll direction is right. Use with `on:right`
+ * @example <caption>Example usage of touchScroll action</caption>
+ * <div bind:page={pages[current]} use:touchScroll on:left={() => ++current} on:right={() => --current} />
+ */
+export function touchScroll(node) {
+    let lastX
+    let direction = null
+    const getDirection = (event) => {
+        let currentX = event?.touches ? event.touches[0].clientX : event.clientX
+        direction = currentX > lastX ? "right" : "left"
+        lastX = currentX
+    }
+    const handleScroll = () => {
+        if (!direction) return 
+        node.dispatchEvent(new CustomEvent(direction))
+    }
+    node.addEventListener("touchmove", getDirection, true)
+    node.addEventListener("touchend", handleScroll, true)
+    return {
+        destroy() {
+            node.removeEventListener("touchmove", getDirection, true)
+            node.removeEventListener("touchend", handleScroll, true)
         }
     }
 }

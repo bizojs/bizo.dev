@@ -1,12 +1,27 @@
 <script>
+    import { createEventDispatcher } from "svelte"
     import { scale } from "svelte/transition"
+    import { touchScroll } from "$lib/util"
 
     export let item
-
     const external = item.website && item.website.startsWith("/") ? false : true
+    const dispatch = createEventDispatcher()
+
+    function scrollLeft() {
+        dispatch("scroll-left")
+    }
+    function scrollRight() {
+        dispatch("scroll-right")
+    }
 </script>
 
-<div in:scale={{ start: 0.99, opacity: 0.3, duration: 1000 }} class="flex w-full p-8 rounded-lg bg-secondary-light/80 dark:bg-secondary-dark/50 relative">
+<div
+    use:touchScroll
+    on:left={scrollLeft}
+    on:right={scrollRight}
+    in:scale={{ start: 0.99, opacity: 0.3, duration: 1000 }}
+    class="flex w-full p-8 rounded-lg bg-secondary-light/80 dark:bg-secondary-dark/50 relative"
+>
     <div class="flex justify-between w-full items-center gap-5 flex-grow">
         <div class="flex flex-col gap-5 justify-between">
             <div class="flex flex-col lg:gap-2 gap-5">

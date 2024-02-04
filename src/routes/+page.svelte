@@ -59,6 +59,14 @@
 	function setPage(page) {
 		selected = page
 	}
+	function nextPage() {
+		if (selected + 1 > projects.length - 1) return selected = 0
+		++selected
+	}
+	function previousPage() {
+		if (selected - 1 < 0) return selected = projects.length - 1
+		--selected
+	}
 	function setTab(page) {
 		tab = page
 	}
@@ -77,7 +85,11 @@
 	{#if tab === "projects"}
 		<div in:scale={{ start: 0.99, opacity: 0.3, duration: 1000 }} class="flex flex-col gap-5 items-center justify-center mt-6">
 			{#key selected}
-				<Project bind:item={projects[selected]} />
+				<Project
+					bind:item={projects[selected]}
+					on:scroll-left={nextPage}
+					on:scroll-right={previousPage}
+				/>
 				<div class="flex items-center gap-2">
 					{#each projects as project, i}
 						<button on:click={() => setPage(i)} class="py-1 lg:px-12 px-5 rounded-full cursor-pointer bg-btn-light {projects[selected].name === project.name ? "bg-btn-light dark:bg-nav-dark" : "bg-btn-light/40 dark:bg-secondary-dark hover:!bg-export"} transition"></button>
