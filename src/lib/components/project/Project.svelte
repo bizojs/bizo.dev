@@ -3,9 +3,7 @@
     const external = item.website && item.website.startsWith("/") ? false : true
 </script>
 
-<div
-    class="flex w-full p-8 rounded-lg bg-secondary-light dark:bg-secondary-dark relative select-none"
->
+<div class="flex w-full p-8 rounded-lg bg-secondary-light dark:bg-secondary-dark relative select-none">
     <div class="flex justify-between w-full items-center gap-5 flex-grow">
         <div class="flex flex-col gap-5 justify-between">
             <div class="flex flex-col lg:gap-2 gap-5">

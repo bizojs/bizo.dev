@@ -16,7 +16,6 @@
 
 	$: selected = 0
 	$: tab = "projects"
-	$: direction = null
 
 	const [send, receive] = crossfade({
 		duration: 500,
@@ -24,14 +23,12 @@
 
 	const projects = [
 		{
-			id: 1,
 			name: "Snippet Generator",
 			description: "Generate custom code snippets for Visual Studio Code",
 			image: "/favicon.png",
 			website: "/snippet"
 		},
 		{
-			id: 2,
 			name: "Demos",
 			description: "The website of all demos that I make for SvelteKit. Each demo will have an interactive view of how it works.",
 			image: "/favicon.png",
@@ -39,7 +36,6 @@
 			website: "https://demo.bizo.dev"
 		},
 		{
-			id: 3,
 			name: "Rada",
 			description: "An intuitive Discord bot to help with all your moderation / management needs.",
 			image: "/projects/Rada.png",
@@ -47,21 +43,18 @@
 			website: "https://rada.bizo.dev"
 		},
 		{
-			id: 4,
 			name: "Temple MDW",
 			description: "The guardian of The Sheep Pen Discord server for the streamer bebanteeni.",
 			image: "/projects/TempleMDT.png",
 			github: "bizojs/temple-mdw"
 		},
 		{
-			id: 5,
 			name: "Lightable",
 			description: "Open-source chatting. Free, Open-source, Forever.",
 			image: "/projects/Lightable.png",
 			github: "Lightable/Lightable"
 		},
 		{
-			id: 6,
 			name: "The Sheep Guardian",
 			description: "The guardian of The Sheep Pen Discord server for the streamer bebanteeni.",
 			image: "/projects/TheSheepGuardian.png",
@@ -70,7 +63,8 @@
 	]
 
 	function handleSwipe(event) {
-		direction = event.detail.direction
+		const { direction } = event.detail
+		if (!direction) return
 		if (direction === "down") {
 			if (selected + 1 > projects.length - 1) return selected = 0
 			++selected
@@ -96,14 +90,9 @@
 	</div>
 	{#if tab === "projects"}
 		<div in:fade use:swipe on:swiped={handleSwipe} class="flex relative items-center transition-all w-full">
-			{#each projects as project, i (project.id)}
+			{#each projects as project, i (i)}
 				{#key selected}
-					<div
-						in:send={{ key: i }}
-						out:receive={{ key: i }}
-						use:swipeMove
-						class="flex-shrink-0 w-full absolute top-0 left-0 transition-transform duration-[25ms] cursor-ns-resize {i === selected ? "z-20" : "z-10"} {i < selected || i > selected ? "opacity-10" : ""}"
-					>
+					<div in:send={{ key: i }} out:receive={{ key: i }} use:swipeMove class="flex-shrink-0 w-full absolute top-0 left-0 transition-transform duration-[25ms] cursor-ns-resize {i === selected ? "z-20" : "z-10"} {i < selected || i > selected ? "opacity-10" : ""}">
 						<Project item={project} />
 						<div class="flex gap-2 justify-center items-center select-none absolute top-0 left-0 w-full h-full rounded-lg backdrop-blur-sm bg-black/10 transition-opacity duration-700" style="opacity: 0">
 							<p class="text-2xl text-primary-light/70 dark:text-primary-dark/70 animate-pulse">Release to change slide</p>
