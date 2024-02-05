@@ -44,7 +44,7 @@ function moveElementBack(node) {
  * @listens event:mouseup
  * @fires   swiped             - Use with `on:swiped` - Use `<Event>.detail.direction` to get the swipe direction
  * @example
- * <div bind:page={pages[current]} use:swipe on:swiped={(event) => handleSwipe(e.detail.direction)}>
+ * <div bind:page={pages[current]} use:swipe on:swiped={(event) => handleSwipe(event.detail.direction)}>
  * ...
  * </div>
  */
@@ -73,7 +73,7 @@ export function swipe(node) {
  * @listens event:mousemove
  * @listens event:mouseup
  * @example
- * <div use:swipe on:swiped={(event) => handleSwipe(e.detail.direction)}>
+ * <div use:swipe on:swiped={(event) => handleSwipe(event.detail.direction)}>
  *     <div use:swipeMove />
  * </div>
  */
