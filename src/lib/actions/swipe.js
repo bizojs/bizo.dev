@@ -37,15 +37,16 @@ function moveElementBack(node) {
 
 /**
  * SvelteKit Action to handle which direction an element is swiped
- * @param   {HTMLElement} node - The element
+ * @param   {HTMLElement} node - The element that the action is used on
  * @listens event:touchstart
  * @listens event:touchend
  * @listens event:mousedown
  * @listens event:mouseup
- * @fires   left               - If the scroll direction is left. Use with `on:left`
- * @fires   right              - If the scroll direction is right. Use with `on:right`
- * @example <caption>Example usage of swipe action</caption>
- * <div bind:page={pages[current]} use:swipe on:swiped={(e) => e.detail.direction} />
+ * @fires   swiped             - Use with `on:swiped` - Use `<Event>.detail.direction` to get the swipe direction
+ * @example
+ * <div bind:page={pages[current]} use:swipe on:swiped={(event) => handleSwipe(e.detail.direction)}>
+ * ...
+ * </div>
  */
 export function swipe(node) {
     node.addEventListener("touchstart", (event) => handleStart(event))
@@ -64,15 +65,15 @@ export function swipe(node) {
 
 /**
  * SvelteKit Action to handle moving element while swiping
- * @param   {HTMLElement} node - The element
+ * @param   {HTMLElement} node - The element that the action is used on
  * @listens event:touchstart
  * @listens event:touchmove
  * @listens event:touchend
  * @listens event:mousedown
  * @listens event:mousemove
  * @listens event:mouseup
- * @example <caption>Example usage of swipeMove action</caption>
- * <div use:swipe on:swiped={(e) => e.detail.direction}>
+ * @example
+ * <div use:swipe on:swiped={(event) => handleSwipe(e.detail.direction)}>
  *     <div use:swipeMove />
  * </div>
  */
