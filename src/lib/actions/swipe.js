@@ -1,10 +1,19 @@
 let startY = 0
 let threshold = 50
 
+/**
+ * Sets the initial position
+ * @param {MouseEvent|TouchEvent} event
+ */
 function handleStart(event) {
     startY = event.clientY || event.touches[0].clientY
 }
 
+/**
+ * Handles moving the element on swipe
+ * @param {MouseEvent|TouchEvent} event
+ * @param {HTMLElement}           node
+ */
 function handleMove(event, node) {
     if (startY === 0) return
     let currentEventY = event.clientY || event.touches[0].clientY
@@ -20,6 +29,11 @@ function handleMove(event, node) {
     node.style.transform = `translateY(${currentY}px)`
 }
 
+/**
+ * Handles getting the position of the swipe
+ * @param {MouseEvent|TouchEvent} event
+ * @param {HTMLElement}           node
+ */
 function handleEnd(event, node) {
     const touchEndY = event.clientY || event.changedTouches[0].clientY
     const deltaY = touchEndY - startY
@@ -31,6 +45,10 @@ function handleEnd(event, node) {
     startY = 0
 }
 
+/**
+ * Sets the swiped element back to the original position
+ * @param {HTMLElement} node
+ */
 function moveElementBack(node) {
     node.style.transform = "translateY(0px)"
 }
