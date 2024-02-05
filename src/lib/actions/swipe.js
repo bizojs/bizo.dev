@@ -36,7 +36,7 @@ function moveElementBack(node) {
 }
 
 /**
- * SvelteKit Action to handle changing a selected element based on the scroll position
+ * SvelteKit Action to handle which direction an element is swiped
  * @param   {HTMLElement} node - The element
  * @listens event:touchstart
  * @listens event:touchend
@@ -63,7 +63,7 @@ export function swipe(node) {
 }
 
 /**
- * SvelteKit Action to handle moving element on swipe
+ * SvelteKit Action to handle moving element while swiping
  * @param   {HTMLElement} node - The element
  * @listens event:touchstart
  * @listens event:touchmove
@@ -72,7 +72,7 @@ export function swipe(node) {
  * @listens event:mousemove
  * @listens event:mouseup
  * @example <caption>Example usage of swipeMove action</caption>
- * <div use:swipe on:swipe={}>
+ * <div use:swipe on:swiped={(e) => e.detail.direction}>
  *     <div use:swipeMove />
  * </div>
  */
