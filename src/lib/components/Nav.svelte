@@ -1,7 +1,7 @@
 <script>
     import { invalidateAll, goto } from "$app/navigation"
     import { enhance, applyAction } from "$app/forms"
-    import { clickOutside } from "$lib/util"
+    import { clickOutside } from "$lib/actions"
     import { page } from "$app/stores"
 
     import IconBlog from "~icons/tabler/article"

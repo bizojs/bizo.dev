@@ -1,8 +1,9 @@
 <script>
     import { fade, fly, scale } from "svelte/transition"
     import { backInOut, quintOut } from "svelte/easing"
-    import { clickOutside, scroll } from "$lib/util"
     import { createEventDispatcher } from "svelte"
+    import { clickOutside } from "$lib/actions"
+    import { scroll } from "$lib/util"
     import { onMount } from "svelte"
 
     import IconX from "~icons/tabler/x"
