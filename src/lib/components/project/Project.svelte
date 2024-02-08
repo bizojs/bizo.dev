@@ -1,27 +1,9 @@
 <script>
-    import { createEventDispatcher } from "svelte"
-    import { scale } from "svelte/transition"
-    import { touchScroll } from "$lib/util"
-
     export let item
     const external = item.website && item.website.startsWith("/") ? false : true
-    const dispatch = createEventDispatcher()
-
-    function scrollLeft() {
-        dispatch("scroll-left")
-    }
-    function scrollRight() {
-        dispatch("scroll-right")
-    }
 </script>
 
-<div
-    use:touchScroll
-    on:left={scrollLeft}
-    on:right={scrollRight}
-    in:scale={{ start: 0.99, opacity: 0.3, duration: 1000 }}
-    class="flex w-full p-8 rounded-lg bg-secondary-light/80 dark:bg-secondary-dark/50 relative"
->
+<div class="flex w-full p-8 rounded-lg bg-secondary-light dark:bg-secondary-dark relative select-none">
     <div class="flex justify-between w-full items-center gap-5 flex-grow">
         <div class="flex flex-col gap-5 justify-between">
             <div class="flex flex-col lg:gap-2 gap-5">
@@ -33,7 +15,7 @@
             </div>
             <div class="flex gap-4 items-center lg:justify-start justify-center">
                 {#if item.github}
-                    <a href={"https://github.com/" + item.github} target="_blank" rel="noreferrer" class="flex items-center gap-2 bg-btn-light/60 hover:bg-btn-light/80 dark:hover:bg-secondary-dark/60 dark:bg-secondary-dark transition px-6 py-2 rounded">
+                    <a href={"https://github.com/" + item.github} target="_blank" rel="noreferrer" class="flex items-center gap-2 bg-btn-light/60 hover:bg-btn-light dark:hover:bg-btn-dark dark:bg-btn-dark/60 transition px-6 py-2 rounded z-50">
                         Github
                     </a>
                 {/if}
@@ -42,7 +24,7 @@
                         href={item.website}
                         target={external ? "_blank" : ""}
                         rel={external ? "external" : ""}
-                        class="flex items-center gap-2 bg-btn-light/60 hover:bg-btn-light/80 dark:hover:bg-secondary-dark/60 dark:bg-secondary-dark transition px-6 py-2 rounded"
+                        class="flex items-center gap-2 bg-btn-light/60 hover:bg-btn-light dark:hover:bg-btn-dark dark:bg-btn-dark/60 transition px-6 py-2 rounded z-50"
                     >
                         Website
                     </a>

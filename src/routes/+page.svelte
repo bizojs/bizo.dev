@@ -3,31 +3,37 @@
 </svelte:head>
 
 <script>
+    import { fade, crossfade } from "svelte/transition"
 	import { Project, Social } from "$lib/components"
-    import { scale, fade } from "svelte/transition"
+	import { swipe, swipeMove } from "$lib/actions"
 
 	import IconDiscord from "~icons/tabler/brand-discord"
 	import IconGithub from "~icons/tabler/brand-github"
 	import IconReddit from "~icons/tabler/brand-reddit"
 	import IconTwitter from "~icons/tabler/brand-x"
+	import IconResize from "~icons/f7/resize-v"
 	import IconEmail from "~icons/tabler/at"
 
 	$: selected = 0
 	$: tab = "projects"
 
+	const [send, receive] = crossfade({
+		duration: 500,
+	})
+
 	const projects = [
+		{
+			name: "Snippet Generator",
+			description: "Generate custom code snippets for Visual Studio Code",
+			image: "/favicon.png",
+			website: "/snippet"
+		},
 		{
 			name: "Demos",
 			description: "The website of all demos that I make for SvelteKit. Each demo will have an interactive view of how it works.",
 			image: "/favicon.png",
 			github: "bizojs/demo.bizo.dev",
 			website: "https://demo.bizo.dev"
-		},
-		{
-			name: "Snippet Generator",
-			description: "Generate custom code snippets for Visual Studio Code",
-			image: "/favicon.png",
-			website: "/snippet"
 		},
 		{
 			name: "Rada",
@@ -56,16 +62,16 @@
 		}
 	]
 
-	function setPage(page) {
-		selected = page
-	}
-	function nextPage() {
-		if (selected + 1 > projects.length - 1) return selected = 0
-		++selected
-	}
-	function previousPage() {
-		if (selected - 1 < 0) return selected = projects.length - 1
-		--selected
+	function handleSwipe(event) {
+		const { direction } = event.detail
+		if (!direction) return
+		if (direction === "down") {
+			if (selected + 1 > projects.length - 1) return selected = 0
+			++selected
+		} else if (direction === "up") {
+			if (selected - 1 < 0) return selected = projects.length - 1
+			--selected
+		}
 	}
 	function setTab(page) {
 		tab = page
@@ -73,29 +79,28 @@
 </script>
 
 <div class="flex flex-col lg:mx-40">
-	<p class="text-6xl lg:text-left text-center lg:my-20 my-8 font-semibold">Hey there.</p>
+	<p class="text-6xl lg:text-left text-center lg:my-16 my-8 font-semibold">Hey there.</p>
 	<div class="flex flex-col">
 		<p class="text-lg dark:text-primary-dark/80 lg:text-left text-center">A self-taught developer from the <span class="font-semibold">UK</span>.</p>
 		<p class="text-lg dark:text-primary-dark/80 lg:text-left text-center">Primary focus: <span class="font-semibold">frontend web development</span>.</p>
 	</div>
-	<div class="flex lg:justify-start justify-center items-center">
-		<button on:click={() => setTab("projects")} class="mt-32 pb-4 dark:text-primary-dark/90 text-lg font-semibold px-3 pr-5 border-b-2 dark:border-secondary-dark transition {tab === "projects" ? "!border-export" : ""}">Projects</button>
-		<button on:click={() => setTab("socials")} class="mt-32 pb-4 dark:text-primary-dark/90 text-lg font-semibold px-5 border-b-2 dark:border-secondary-dark transition {tab === "socials" ? "!border-export" : ""}">Socials</button>
+	<div class="flex lg:justify-start justify-center items-center mb-10">
+		<button on:click={() => setTab("projects")} class="lg:mt-28 mt-16 pb-4 dark:text-primary-dark/90 text-lg font-semibold px-3 pr-5 border-b-2 dark:border-secondary-dark transition {tab === "projects" ? "!border-export" : ""}">Projects</button>
+		<button on:click={() => setTab("socials")} class="lg:mt-28 mt-16 pb-4 dark:text-primary-dark/90 text-lg font-semibold px-5 border-b-2 dark:border-secondary-dark transition {tab === "socials" ? "!border-export" : ""}">Socials</button>
 	</div>
 	{#if tab === "projects"}
-		<div in:scale={{ start: 0.99, opacity: 0.3, duration: 1000 }} class="flex flex-col gap-5 items-center justify-center mt-6">
-			{#key selected}
-				<Project
-					bind:item={projects[selected]}
-					on:scroll-left={nextPage}
-					on:scroll-right={previousPage}
-				/>
-				<div class="flex items-center gap-2">
-					{#each projects as project, i}
-						<button on:click={() => setPage(i)} class="py-1 lg:px-12 px-5 rounded-full cursor-pointer bg-btn-light {projects[selected].name === project.name ? "bg-btn-light dark:bg-nav-dark" : "bg-btn-light/40 dark:bg-secondary-dark hover:!bg-export"} transition"></button>
-					{/each}
-				</div>
-			{/key}
+		<div in:fade use:swipe on:swiped={handleSwipe} class="flex relative items-center transition-all w-full">
+			{#each projects as project, i (i)}
+				{#key selected}
+					<div in:send={{ key: i }} out:receive={{ key: i }} use:swipeMove class="flex-shrink-0 w-full absolute top-0 left-0 transition-transform duration-[25ms] cursor-ns-resize {i === selected ? "z-20" : "z-10"} {i < selected || i > selected ? "opacity-10" : ""}">
+						<Project item={project} />
+						<div class="flex gap-2 justify-center items-center select-none absolute top-0 left-0 w-full h-full rounded-lg backdrop-blur-sm bg-black/10 transition-opacity duration-700" style="opacity: 0">
+							<p class="text-2xl text-primary-light/70 dark:text-primary-dark/70 animate-pulse">Release to change slide</p>
+							<IconResize class="w-10 h-10 animate-pulse" />
+						</div>
+					</div>
+				{/key}
+			{/each}
 		</div>
 	{:else if tab === "socials"}
 		<div in:fade class="flex gap-4 items-center flex-wrap lg:justify-start justify-center mt-10">
