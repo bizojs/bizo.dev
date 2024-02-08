@@ -15,7 +15,7 @@ export const handle = async({ event, resolve }) => {
 
     return await resolve(event, {
         transformPageChunk: ({ html }) => {
-            return html.replace(/class="([a-z]*)"/, `class="${theme === "dark" ? "dark" : ""}"`)
+            return html.replace(/class="([a-z]*)"/, `class="${event.locals.theme === "dark" ? "dark" : ""}"`)
         }
     })
 }

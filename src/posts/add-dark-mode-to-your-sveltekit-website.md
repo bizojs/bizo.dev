@@ -114,7 +114,7 @@ export const handle = async({ event, resolve }) => {
     // Here we change the class for our HTML element.
     // We are doing this instead of using onMount in our layout to prevent flickering
     transformPageChunk: ({ html }) => {
-      return html.replace(/class="([a-z]*)"/, `class="${theme === "dark" ? "dark" : ""}"`)
+      return html.replace(/class="([a-z]*)"/, `class="${event.locals.theme === "dark" ? "dark" : ""}"`)
     }
   })
 }
