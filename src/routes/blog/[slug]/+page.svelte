@@ -38,8 +38,8 @@
 
 <Scroll color="bg-export" height="h-1" />
 
-<article class="flex flex-col w-full items-center mt-20 gap-12">
-    <div class="flex flex-col gap-5 lg:w-1/2 w-full items-center">
+<article class="flex flex-col w-full items-center lg:mt-36 mt-28 lg:mb-36 mb-28 gap-12">
+    <div class="flex flex-col gap-5 lg:w-2/3 w-full items-center">
         <hgroup class="flex flex-col gap-4 items-center">
             <h1 class="text-5xl font-semibold break-words text-center">{data.meta.title}</h1>
             <div class="flex flex-wrap gap-2 items-center">
@@ -61,7 +61,7 @@
             </button>
         </div>
     </div>
-    <div id="post-content" class="prose flex flex-col gap-3 lg:w-1/2 w-full justify-center">
+    <div id="post-content" class="prose flex flex-col gap-3 lg:w-2/3 w-full justify-center">
         <svelte:component this={data.content} />
     </div>
 </article>

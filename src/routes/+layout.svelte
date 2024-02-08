@@ -1,5 +1,5 @@
 <script>
-  import { Nav, Transition } from "$lib/components"
+  import { Nav, Footer, Transition } from "$lib/components"
   import { Notifications } from "$lib/notifications"
   import "../app.css"
 </script>
@@ -8,8 +8,12 @@
 
 <Nav />
 
-<div class="flex flex-col p-5">
+<div class="flex flex-col">
   <Transition>
-    <slot />
+    <div class="lg:mx-60 mx-5">
+      <slot />
+    </div>
   </Transition>
 </div>
+
+<Footer />

@@ -9,6 +9,32 @@
 	@apply text-primary-light dark:text-primary-dark;
 }
 
+.profile-img {
+    /* background-image: url(/logo.png); */
+    /* background-position: center; */
+    /* background-repeat: no-repeat; */
+    /* border: 3px solid #ffaabb; */
+    /* border-radius: 60% 40% 30% 70%/60% 30% 70% 40%; */
+    /* height: 35rem; */
+    /* width: 35rem; */
+    /* position: relative; */
+    /* transition: all 1s ease-in-out; */
+    animation: morph 8s ease-in-out infinite;
+    @apply lg:h-80 lg:w-80 w-60 h-60 transition-all duration-1000 relative border-[3px] border-profile dark:border-profile-dark bg-no-repeat bg-center bg-[url(/logo.png)] rounded-[60%_40%_30%_70%/60%_30%_70%_40%]
+}
+
+@keyframes morph {
+    0% {
+        border-radius: 60% 40% 30% 70%/60% 30% 70% 40%;
+    }
+    50% {
+        border-radius: 30% 60% 70% 40%/50% 60% 30% 60%;
+    }
+    100% {
+        border-radius: 60% 40% 30% 70%/60% 30% 70% 40%;
+    }
+}
+
 svg > path,
 svg > g
 {
@@ -18,6 +44,15 @@ svg > g
 svg.thick > path,
 svg.thick > g {
     @apply stroke-[2.5]
+}
+
+svg.social {
+    @apply transition-all
+}
+
+svg.social:hover > path,
+svg.social:hover > g {
+    @apply stroke-accent transition-all
 }
 
 svg.post-views > path,

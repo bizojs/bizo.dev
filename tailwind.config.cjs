@@ -11,13 +11,14 @@ export default {
         import: "#d55fde",
         bracket: "#ABB2BF",
         titlebar: "#161922",
+        accent: "#08c6e7",
         scroll: {
           light: "#989EA7",
           dark: "#1C1E21"
         },
         primary: {
           light: "#EBEFF7",
-          dark: "#383C41"
+          dark: "#1C1F22"
         },
         secondary: {
           light: "#DBDFE7",
@@ -34,6 +35,10 @@ export default {
         border: {
           light: "#393C43",
           dark: "#B0BABF"
+        },
+        profile: {
+          DEFAULT: "#2D2E32",
+          dark: "#fff"
         },
         notif: {
           default: {
@@ -66,12 +71,12 @@ export default {
       },
       textColor: {
         primary: {
-          light: "#000",
-          dark: "#fff"
+          light: "#2D2E32",
+          dark: "#E3ECEF"
         },
         secondary: {
-          light: "#5C6163",
-          dark: "#A6AAAC"
+          light: "#545E62",
+          dark: "#93989B"
         }
       },
       strokeWidth: {
