@@ -10,17 +10,16 @@
 }
 
 .profile-img {
-    /* background-image: url(/logo.png); */
-    /* background-position: center; */
-    /* background-repeat: no-repeat; */
-    /* border: 3px solid #ffaabb; */
-    /* border-radius: 60% 40% 30% 70%/60% 30% 70% 40%; */
-    /* height: 35rem; */
-    /* width: 35rem; */
-    /* position: relative; */
-    /* transition: all 1s ease-in-out; */
     animation: morph 8s ease-in-out infinite;
-    @apply lg:h-80 lg:w-80 w-60 h-60 transition-all duration-1000 relative border-[3px] border-profile dark:border-profile-dark bg-no-repeat bg-center bg-[url(/logo.png)] rounded-[60%_40%_30%_70%/60%_30%_70%_40%]
+    @apply lg:h-80 lg:w-80 w-60 h-60 relative outline outline-4 outline-accent/30 dark:outline-accent/20 drop-shadow-lg bg-no-repeat bg-center bg-[url(/logo.png)] rounded-[60%_40%_30%_70%/60%_30%_70%_40%]
+}
+
+.follow {
+    transform:
+        perspective(2000px)
+        rotateY(var(--rotateY))
+        rotateX(var(--rotateX));
+    transform-style: preserve-3d;
 }
 
 @keyframes morph {
@@ -223,5 +222,5 @@ html:is(.dark) *::-webkit-scrollbar-thumb {
     @apply !border-primary-dark
 }
 *::-webkit-scrollbar-thumb {
-    @apply rounded-lg border-solid border-[3] bg-scroll-light/80 dark:bg-scroll-dark/80 hover:bg-scroll-light dark:hover:bg-scroll-dark border-primary-light 
+    @apply rounded-lg border-solid border-[3] bg-scroll-light/80 dark:bg-secondary-dark/80 hover:bg-scroll-light dark:hover:bg-secondary-dark border-primary-light 
 }

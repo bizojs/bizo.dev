@@ -36,9 +36,9 @@ export default {
           light: "#393C43",
           dark: "#B0BABF"
         },
-        profile: {
-          DEFAULT: "#2D2E32",
-          dark: "#fff"
+        project: {
+          DEFAULT: "#F4F8FE",
+          dark: "#23252A"
         },
         notif: {
           default: {

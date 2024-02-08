@@ -16,7 +16,7 @@
     $: theme = $page.data.theme
     $: dark = theme === "dark"
 
-    $: menuOpen = true
+    $: menuOpen = false
  
     function toggleTheme() {
        document.documentElement.classList.toggle("dark")
@@ -32,7 +32,7 @@
     }
 </script>
 
-<nav class="p-4 flex items-center justify-between shadow fixed top-0 w-full z-50 bg-primary-light dark:bg-primary-dark">
+<nav class="p-4 flex items-center justify-between border-b-2 border-secondary-light/80 dark:border-secondary-dark/20 fixed top-0 w-full z-50 bg-primary-light dark:bg-primary-dark">
     <div class="flex items-center gap-10">
         <a href="/" class="font-semibold text-xl">bizo.dev</a>
         <div class="lg:flex hidden items-center gap-5">
