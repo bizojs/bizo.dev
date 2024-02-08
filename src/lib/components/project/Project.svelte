@@ -15,7 +15,7 @@
             </div>
             <div class="flex gap-4 items-center lg:justify-start justify-center">
                 {#if item.github}
-                    <a href={"https://github.com/" + item.github} target="_blank" rel="noreferrer" class="flex items-center gap-2 bg-btn-light/60 hover:bg-btn-light dark:hover:bg-btn-dark dark:bg-btn-dark/60 transition px-6 py-2 rounded">
+                    <a href={"https://github.com/" + item.github} target="_blank" rel="noreferrer" class="flex items-center gap-2 bg-btn-light/60 hover:bg-btn-light dark:hover:bg-btn-dark dark:bg-btn-dark/60 transition px-6 py-2 rounded z-50">
                         Github
                     </a>
                 {/if}
@@ -24,7 +24,7 @@
                         href={item.website}
                         target={external ? "_blank" : ""}
                         rel={external ? "external" : ""}
-                        class="flex items-center gap-2 bg-btn-light/60 hover:bg-btn-light dark:hover:bg-btn-dark dark:bg-btn-dark/60 transition px-6 py-2 rounded"
+                        class="flex items-center gap-2 bg-btn-light/60 hover:bg-btn-light dark:hover:bg-btn-dark dark:bg-btn-dark/60 transition px-6 py-2 rounded z-50"
                     >
                         Website
                     </a>
