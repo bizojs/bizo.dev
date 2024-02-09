@@ -45,7 +45,7 @@
     </blockquote>
 </div>
 
-<div class="flex lg:flex-row flex-col flex-wrap justify-between gap-2 lg:mx-40 lg:mb-36 mb-28">
+<div class="flex lg:flex-row flex-col flex-wrap justify-between gap-2 lg:mx-40 lg:mb-32 mb-28">
     <div class="flex flex-col gap-2 flex-grow lg:w-1/3 w-full">
         <div class="flex h-12 gap-2 w-full">
             <input class="px-4 py-2 text-lg w-full h-fit rounded bg-secondary-light/70 dark:bg-secondary-dark/40 hover:bg-secondary-light dark:hover:bg-secondary-dark/60 transition placeholder:text-primary-light/60 dark:placeholder:text-primary-dark/70" type="text" placeholder="Description" bind:value={description}>

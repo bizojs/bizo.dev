@@ -11,9 +11,9 @@ export function follow(node) {
 
         const offsetX = ((x - middleX) / middleX) * 15
         const offsetY = ((y - middleY) / middleY) * 10
+        
         node.style.setProperty("--rotateX", -1 * offsetY + "deg")
-        node.style.setProperty("--rotateY", offsetX + "deg")
-
+        node.style.setProperty("--rotateY",      offsetX + "deg")
     }
 
     document.addEventListener("mousemove", handleMove)

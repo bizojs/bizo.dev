@@ -3,32 +3,26 @@
     export let post
 </script>
 
-<a href="/blog/{post.slug}" class="flex flex-col gap-5 p-6 rounded bg-secondary-light/50 hover:bg-secondary-light/60 dark:hover:bg-secondary-dark/60 dark:bg-secondary-dark/50 transition relative justify-between hover:animate-scale basis-1/4 flex-grow min-w-[20rem]">
-    <h1 class="text-3xl font-semibold">{post.title}</h1>
-    <div class="flex flex-col gap-5">
-        <span class="p-5 border-l-4 border-btn-light dark:border-secondary-dark rounded bg-nav-light/80 dark:bg-nav-dark/20">
-            <p class="text-base text-secondary-light dark:text-secondary-dark">{post.description}</p>
-        </span>
-        <div class="flex justify-between gap-2">
-            {#if post.categories.length > 0}
-                <div class="flex glex-col gap-2 flex-wrap items-end">
-                    {#each post.categories as category}
-                        <div class="flex lg:flex-grow-0 flex-grow lg:justify-start justify-center py-1.5 px-2.5 rounded bg-nav-light dark:bg-secondary-dark">
-                            <p class="text-secondary-light dark:text-secondary-dark text-sm">#{category}</p>
-                        </div>
-                    {/each}
+<a href="/blog/{post.slug}" class="flex flex-col gap-5 p-6 lg:w-1/3 w-full flex-grow rounded-2xl bg-project dark:bg-project-dark select-none drop-shadow-sm hover:animate-scale">
+    <div class="flex justify-between items-center w-full gap-10 flex-grow">
+        <div class="flex flex-col gap-2">
+            <h2 class="font-semibold text-lg drop-shadow-sm">{post.title}</h2>
+            <p class="text-secondary-light dark:text-secondary-dark text-sm">{post.description}</p>
+        </div>
+    </div>
+    <div class="flex justify-between gap-5">
+        <div class="flex gap-2 flex-wrap">
+            {#each post.categories as category}
+                <div class="flex items-center gap-1 bg-accent/10 hover:bg-accent/20 px-3 py-1.5 rounded-lg transition-all">
+                    <p class="text-sm">{category}</p>
                 </div>
-            {:else}
-                <div class="flex lg:flex-grow-0 flex-grow lg:justify-start justify-center py-1.5 px-2.5 rounded bg-nav-light dark:bg-secondary-dark">
-                    <p class="text-secondary-light dark:text-secondary-dark text-sm">No tags</p>
-                </div>
-            {/if}
-            <div class="flex gap-1 items-center self-end">
-                <IconViews class="w-6 h-6 post-views" />
-                <p class="text-base font-semibold text-primary-light/60 dark:text-primary-dark/60">
-                    {post.views.toLocaleString()}
-                </p>
-            </div>
+            {/each}
+        </div>
+        <div class="flex items-center gap-1 bg-accent/10 hover:bg-accent/20 px-3 py-1.5 rounded-lg transition-all self-end">
+            <IconViews class="w-5 h-5" />
+            <p class="text-sm">
+                {post.views.toLocaleString()}
+            </p>
         </div>
     </div>
 </a>

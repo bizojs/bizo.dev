@@ -7,11 +7,10 @@
 
 <script>
     import { Post } from "$lib/components"
-
     export let data
 </script>
 
-<div class="flex justify-center lg:my-20 gap-6 flex-wrap items-stretch lg:mt-36 mt-28">
+<div class="flex justify-center lg:my-20 gap-4 flex-wrap items-stretch lg:mt-36 mt-28 mb-20">
     {#each data.posts as post}
         <Post {post} />
     {/each}
