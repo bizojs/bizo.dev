@@ -1,2 +1,2 @@
 export { clickOutside } from "./clickOutside"
-export { swipe, swipeMove } from "./swipe"
+export { follow } from "./follow"

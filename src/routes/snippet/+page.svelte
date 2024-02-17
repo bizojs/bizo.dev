@@ -36,7 +36,7 @@
     }
 </script>
 
-<div class="flex flex-col gap-10 justify-center mt-10 mb-6 text-center lg:mx-40">
+<div class="flex flex-col gap-10 justify-center mb-6 text-center lg:mx-40 lg:mt-56 mt-28">
     <h1 class="lg:text-6xl text-4xl font-semibold">Visual Studio Code Snippet Creator</h1>
     <blockquote class="text-start">
         <p class="text-base text-primary-light/70 dark:text-primary-dark/70">
@@ -45,7 +45,7 @@
     </blockquote>
 </div>
 
-<div class="flex lg:flex-row flex-col flex-wrap justify-between gap-2 lg:mx-40">
+<div class="flex lg:flex-row flex-col flex-wrap justify-between gap-2 lg:mx-40 lg:mb-32 mb-28">
     <div class="flex flex-col gap-2 flex-grow lg:w-1/3 w-full">
         <div class="flex h-12 gap-2 w-full">
             <input class="px-4 py-2 text-lg w-full h-fit rounded bg-secondary-light/70 dark:bg-secondary-dark/40 hover:bg-secondary-light dark:hover:bg-secondary-dark/60 transition placeholder:text-primary-light/60 dark:placeholder:text-primary-dark/70" type="text" placeholder="Description" bind:value={description}>
@@ -67,13 +67,6 @@
         </div>
     </div>
 </div>
-
-<!-- <blockquote class="pt-7 text-start">
-    <p class="text-base text-primary-light/70 dark:text-primary-dark/70">
-        To import this snippet into VS Code, use the shortcut <code id="code">CTRL</code> + <code id="code">SHIFT</code> + <code id="code">P</code> to open the Command Pallet, type <code id="code">config</code> - it should say <span class="text-theme-text">"Snippets: Configure User Snippets"</span>.<br />
-        Select that option and then type the name of the language you are creating the snippet for ex. "html". A .json file should pop up - Paste the snippet you copied into that file.
-    </p>
-</blockquote> -->
 
 {#if helpOpen}
     <Dialog title="How to use these snippets?" on:close={toggleHelp}>

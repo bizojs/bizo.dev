@@ -1,14 +1,14 @@
 export const handle = async({ event, resolve }) => {
     const theme = event.cookies.get("color-scheme")
     if (!theme) {
-        event.cookies.set("color-scheme", "dark", {
+        event.cookies.set("color-scheme", "light", {
             path: "/",
             httpOnly: true,
             sameSite: "strict",
             secure: process.env.NODE_ENV === "production",
             maxAge: 60 * 60 * 24 * 365 // 1 Year
         })
-        event.locals.theme = "dark"
+        event.locals.theme = "light"
     } else {
         event.locals.theme = theme
     }

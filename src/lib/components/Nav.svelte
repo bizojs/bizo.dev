@@ -2,12 +2,16 @@
     import { invalidateAll, goto } from "$app/navigation"
     import { enhance, applyAction } from "$app/forms"
     import { clickOutside } from "$lib/actions"
+    import { fly } from "svelte/transition"
+    import { scrollTo } from "$lib/util"
     import { page } from "$app/stores"
 
+    import IconPortfolio from "~icons/tabler/layout-list"
     import IconBlog from "~icons/tabler/article"
     import IconMenu from "~icons/tabler/menu-2"
     import IconRSS from "~icons/tabler/rss"
     import IconAt from "~icons/tabler/at"
+    import IconX from "~icons/tabler/x"
  
     $: theme = $page.data.theme
     $: dark = theme === "dark"
@@ -26,32 +30,25 @@
         toggleMenu()
         goto(url)
     }
- </script>
- 
- <nav class="flex items-center justify-between py-3 px-5 lg:m-4 m-2 mb-10 rounded-md bg-nav-light/80 dark:bg-nav-dark/50 relative">
-    <div class="lg:flex hidden gap-5 items-center">
-        <a href="/" class="{$page.route?.id === "/" ? "border-b-2 rounded-b-none hover:rounded-b border-border-light/10 dark:border-border-dark/20" : ""} py-1.5 px-4 rounded hover:bg-btn-light/80 dark:hover:bg-btn-dark/60 transition">
-            Home
-        </a>
-        <a href="/blog" class="{$page.route?.id?.includes("/blog") ? "border-b-2 rounded-b-none hover:rounded-b border-border-light/10 dark:border-border-dark/20" : ""} py-1.5 px-4 rounded hover:bg-btn-light/80 dark:hover:bg-btn-dark/60 transition">
-            Blog
-        </a>
-        <a href="mailto:contact@bizo.dev" class="py-1.5 px-4 rounded hover:bg-btn-light/80 dark:hover:bg-btn-dark/60 transition">
-            Contact
-        </a>
-        <a href="/rss.xml" target="_blank" rel="noreferrer" class="py-1.5 px-4 rounded hover:bg-btn-light/80 dark:hover:bg-btn-dark/60 transition">
-            RSS
-        </a>
-    </div>
-    <div class="lg:hidden flex gap-5 items-center">
-        <a href="/" class="{$page.route?.id === "/" ? "border-b-2 rounded-b-none hover:rounded-b border-border-light/10 dark:border-border-dark/20" : ""} py-1 px-2 rounded hover:bg-btn-light/80 dark:hover:bg-btn-dark/60 transition">
-            Home
-        </a>
+</script>
+
+<nav class="p-4 flex items-center justify-between border-b-2 border-secondary-light/20 dark:border-secondary-dark/5 fixed top-0 w-full z-50 bg-primary-light dark:bg-primary-dark select-none">
+    <div class="flex items-center gap-10">
+        <a href="/" class="font-semibold text-xl">bizo.dev</a>
+        <div class="lg:flex hidden items-center gap-5">
+            <button on:click={() => scrollTo({ url: "/", hash: "#portfolio" })} class="text-secondary-light dark:text-secondary-dark dark:hover:text-primary-dark hover:text-primary-light transition-all">Portfolio</button>
+            <a href="/blog" class="text-secondary-light dark:text-secondary-dark dark:hover:text-primary-dark hover:text-primary-light transition-all">Blog</a>
+            <a href="mailto:contact@bizo.dev" class="text-secondary-light dark:text-secondary-dark dark:hover:text-primary-dark hover:text-primary-light transition-all">Contact</a>
+        </div>
     </div>
     <div class="flex items-center gap-2">
+        <button type="button" on:click={() => goToUrl("rss.xml")} title="RSS" class="flex p-3 items-center justify-center rounded-lg hover:bg-btn-light/40 dark:hover:bg-btn-dark/30 transition">
+            <IconRSS class="w-5 h-5 pointer-events-none thick" />
+        </button>
         <form
             method="post"
             action="/?/setTheme"
+            title={dark ? "Enable light theme" : "Enable dark theme"}
             use:enhance={() => {
                 return async({ result }) => {
                     invalidateAll()
@@ -60,14 +57,14 @@
                 }
             }}
         >
-           <button type="submit" class="cursor-pointer select-none items-center rounded">
+            <button type="submit" class="cursor-pointer select-none items-center rounded">
                 <input
                     type="checkbox"
                     bind:checked={dark}
                     name="theme"
                     class="sr-only"
                 >
-              <span class="flex p-2 items-center justify-center rounded hover:bg-btn-light/80 dark:hover:bg-btn-dark/60 transition">
+                <span class="flex p-3 items-center justify-center rounded-lg hover:bg-btn-light/40 dark:hover:bg-btn-dark/30 transition">
                     {#if dark}
                         <svg
                             width="20"
@@ -108,28 +105,34 @@
                 </span>
             </button>
         </form>
-        <button type="button" on:click={toggleMenu} class="flex lg:hidden p-2 rounded hover:bg-btn-light/80 dark:hover:bg-btn-dark/60 transition">
-            <IconMenu class="w-5 h-5 pointer-events-none" />
+        <button type="button" on:click={toggleMenu} class="lg:hidden flex p-3 items-center justify-center rounded-lg hover:bg-btn-light/40 dark:hover:bg-btn-dark/30 transition">
+            <IconMenu class="w-5 h-5 pointer-events-none thick" />
         </button>
-        {#if menuOpen}
-            <div
-                use:clickOutside
-                on:outclick={toggleMenu}
-                class="flex lg:hidden flex-col gap-1 p-2 rounded absolute top-16 right-0 w-[70%] bg-nav-light dark:bg-nav-dark z-50"
-            >
-                <button type="button" on:click={() => goToUrl("/blog")} class="{$page.route?.id?.includes("/blog") ? "bg-btn-light/20 dark:bg-btn-dark/20" : ""} flex w-full justify-between items-center p-2 rounded hover:bg-btn-light/80 dark:hover:bg-btn-dark/60 transition text-sm text-secondary-light dark:text-secondary-dark">
-                    <p>Blog</p>
-                    <IconBlog class="w-5 h-5" />
-                </button>
-                <a href="mailto:contact@bizo.dev" class="flex justify-between items-center p-2 rounded hover:bg-btn-light/80 dark:hover:bg-btn-dark/60 transition text-sm text-secondary-light dark:text-secondary-dark">
-                    <p>Contact</p>
-                    <IconAt class="w-5 h-5" />
-                </a>
-                <button type="button" on:click={() => goToUrl("/rss.xml")} class="flex w-full justify-between items-center p-2 rounded hover:bg-btn-light/80 dark:hover:bg-btn-dark/60 transition text-sm text-secondary-light dark:text-secondary-dark">
-                    <p>RSS</p>
-                    <IconRSS class="w-5 h-5" />
-                </button>
-            </div>
-        {/if}
     </div>
 </nav>
+
+{#if menuOpen}
+    <div
+        use:clickOutside
+        on:outclick={toggleMenu}
+        in:fly={{ x: -1000, duration: 800 }}
+        out:fly={{ x: -1000, duration: 800 }}
+        class="flex lg:hidden flex-col gap-1 p-2 rounded fixed top-0 left-0 w-full h-full bg-nav-light dark:bg-nav-dark z-50 justify-center items-center px-24"
+    >
+        <button type="button" on:click={toggleMenu} class="absolute top-4 right-4">
+            <IconX class="w-6 h-6" />
+        </button>
+        <button type="button" on:click={() => scrollTo({ url: "/", hash: "#portfolio", cb: toggleMenu })} class="flex justify-between w-full gap-5 items-center p-2 rounded group">
+            <p class="text-xl group-hover:text-accent transition-all">Portfolio</p>
+            <IconPortfolio class="w-6 h-6" />
+        </button>
+        <button type="button" on:click={() => goToUrl("/blog")} class="flex justify-between w-full gap-5 items-center p-2 rounded group">
+            <p class="text-xl group-hover:text-accent transition-all">Blog</p>
+            <IconBlog class="w-6 h-6" />
+        </button>
+        <a href="mailto:contact@bizo.dev" class="flex justify-between w-full gap-5 items-center p-2 transition-all group">
+            <p class="text-xl group-hover:text-accent transition-all">Contact</p>
+            <IconAt class="w-6 h-6" />
+        </a>
+    </div>
+{/if}

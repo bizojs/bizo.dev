@@ -1,6 +1,6 @@
 import * as config from "$lib/config"
 
-export async function GET({ fetch, url }) {
+export async function GET({ fetch }) {
     const req = await fetch("api/posts")
     const posts = await req.json()
 

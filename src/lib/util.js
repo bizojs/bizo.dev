@@ -1,4 +1,5 @@
 import { notification } from "$lib/notifications"
+import { goto } from "$app/navigation"
 
 /**
  * Generates a UUID
@@ -102,4 +103,13 @@ export function handleCodeblocks() {
         // replace the codeblock with the new container
         codeblock.replaceWith(container)
     }
+}
+
+export function scrollTo({ url, hash, cb }) {
+    if (url) goto(url)
+    if (cb && typeof cb === "function") cb()
+    setTimeout(() => {
+        let element = document.querySelector(hash)
+        if (element) element?.scrollIntoView({ behaviour: "smooth" })
+    }, 50)
 }
