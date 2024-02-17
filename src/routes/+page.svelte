@@ -59,9 +59,9 @@
 </section>
 
 <section class="flex flex-col gap-5 justify-center items-center mt-56 mb-10 scroll-smooth">
-	<a href="#portfolio" id="portfolio" class="font-bold self-start lg:text-5xl text-lg scroll-smooth">
+	<h2 id="portfolio" class="font-bold self-start lg:text-5xl text-4xl scroll-smooth">
 		Portfolio
-	</a>
+	</h2>
 	<div class="flex gap-4 flex-wrap w-full justify-center">
 		{#each projects as project}
 			<Project {project} />

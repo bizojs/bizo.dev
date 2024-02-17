@@ -3,6 +3,7 @@
     import { enhance, applyAction } from "$app/forms"
     import { clickOutside } from "$lib/actions"
     import { fly } from "svelte/transition"
+    import { scrollTo } from "$lib/util"
     import { page } from "$app/stores"
 
     import IconPortfolio from "~icons/tabler/layout-list"
@@ -35,7 +36,7 @@
     <div class="flex items-center gap-10">
         <a href="/" class="font-semibold text-xl">bizo.dev</a>
         <div class="lg:flex hidden items-center gap-5">
-            <a href="/#portfolio" class="text-secondary-light dark:text-secondary-dark dark:hover:text-primary-dark hover:text-primary-light transition-all">Portfolio</a>
+            <button on:click={() => scrollTo({ url: "/", hash: "#portfolio" })} class="text-secondary-light dark:text-secondary-dark dark:hover:text-primary-dark hover:text-primary-light transition-all">Portfolio</button>
             <a href="/blog" class="text-secondary-light dark:text-secondary-dark dark:hover:text-primary-dark hover:text-primary-light transition-all">Blog</a>
             <a href="mailto:contact@bizo.dev" class="text-secondary-light dark:text-secondary-dark dark:hover:text-primary-dark hover:text-primary-light transition-all">Contact</a>
         </div>
@@ -121,7 +122,7 @@
         <button type="button" on:click={toggleMenu} class="absolute top-4 right-4">
             <IconX class="w-6 h-6" />
         </button>
-        <button type="button" on:click={() => goToUrl("/#portfolio")} class="flex justify-between w-full gap-5 items-center p-2 rounded group">
+        <button type="button" on:click={() => scrollTo({ url: "/", hash: "#portfolio", cb: toggleMenu })} class="flex justify-between w-full gap-5 items-center p-2 rounded group">
             <p class="text-xl group-hover:text-accent transition-all">Portfolio</p>
             <IconPortfolio class="w-6 h-6" />
         </button>

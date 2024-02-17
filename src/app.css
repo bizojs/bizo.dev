@@ -6,7 +6,7 @@
 
 * {
 	font-family: "Rubik", sans-serif;
-	@apply text-primary-light dark:text-primary-dark;
+	@apply text-primary-light dark:text-primary-dark scroll-smooth;
 }
 
 .profile-img {
